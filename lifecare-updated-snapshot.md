@@ -1,0 +1,197 @@
+- main [ref=e2] [box=0,0,1912,5485]:
+  - navigation [ref=e3] [box=0,-18,1912,69]:
+    - generic [ref=e4] [box=316,-18,1280,68]:
+      - link "LifeCare Performance" [ref=e5] [cursor=pointer] [box=336,-2,134,36]:
+        - /url: "#inicio"
+        - img [ref=e7] [box=344,6,20,20]
+        - generic [ref=e10] [box=384,-2,86,36]
+      - generic [ref=e13] [box=800,6,324,20]:
+        - link "Solução" [ref=e14] [cursor=pointer] [box=800,6,53,20]:
+          - /url: "#solucao"
+        - link "Dashboard" [ref=e15] [cursor=pointer] [box=881,6,72,20]:
+          - /url: "#dashboard"
+        - link "Processo" [ref=e16] [cursor=pointer] [box=981,6,62,20]:
+          - /url: "#processo"
+        - link "Contato" [ref=e17] [cursor=pointer] [box=1071,6,52,20]:
+          - /url: "#contato"
+      - link "Agendar demo" [ref=e18] [cursor=pointer] [box=1453,0,123,32]:
+        - /url: "#contato"
+  - generic [ref=e22] [box=316,96,1280,849]:
+    - generic [ref=e23] [box=336,257,548,526]:
+      - generic [ref=e24] [box=336,269,349,34]:
+        - img [ref=e25] [box=349,278,16,16]
+        - text: Inteligência médica para academias premium
+      - heading "A saúde dos seus alunos traduzida em performance mensurável." [level=1] [ref=e28] [box=336,339,548,276]
+      - paragraph [ref=e29] [box=336,638,548,96]: Um sistema para academias que conecta avaliação clínica, dados de treino, biomarcadores e acompanhamento contínuo em uma experiência clara para equipe, médico e aluno.
+      - generic [ref=e30] [box=336,762,548,40]:
+        - link "Agendar demonstração" [ref=e31] [cursor=pointer] [box=336,762,221,40]:
+          - /url: "#contato"
+        - link "Ver painel" [ref=e32] [cursor=pointer] [box=569,762,117,40]:
+          - /url: "#dashboard"
+    - generic [ref=e35] [box=932,318,644,466]:
+      - generic [ref=e36] [box=949,334,610,68]:
+        - generic [ref=e37] [box=965,346,227,44]
+        - img [ref=e41] [box=1511,358,20,20]
+      - generic [ref=e44] [box=949,418,610,255]:
+        - generic [ref=e45] [box=949,418,356,255]
+        - generic [ref=e55] [box=1322,418,237,255]
+      - generic [ref=e67] [box=949,689,610,77]:
+        - generic [ref=e68] [box=949,705,143,77]
+        - generic [ref=e71] [box=1105,705,143,77]
+        - generic [ref=e74] [box=1260,705,143,77]
+        - generic [ref=e77] [box=1416,705,143,77]
+  - generic [ref=e81] [box=0,962,3196,34]:
+    - generic [ref=e82] [box=0,962,145,34]: Bioimpedancia
+    - generic [ref=e83] [box=161,962,60,34]: VO2
+    - generic [ref=e84] [box=236,962,60,34]: HRV
+    - generic [ref=e85] [box=312,962,94,34]: Glicose
+    - generic [ref=e86] [box=421,962,68,34]: Sono
+    - generic [ref=e87] [box=506,962,77,34]: Forca
+    - generic [ref=e88] [box=598,962,77,34]: Risco
+    - generic [ref=e89] [box=691,962,102,34]: Nutrição
+    - generic [ref=e90] [box=809,962,128,34]: Metabolismo
+    - generic [ref=e91] [box=953,962,102,34]: Check-up
+    - generic [ref=e92] [box=1071,962,145,34]: Bioimpedancia
+    - generic [ref=e93] [box=1232,962,60,34]: VO2
+    - generic [ref=e94] [box=1307,962,60,34]: HRV
+    - generic [ref=e95] [box=1383,962,94,34]: Glicose
+    - generic [ref=e96] [box=1492,962,68,34]: Sono
+    - generic [ref=e97] [box=1576,962,77,34]: Forca
+    - generic [ref=e98] [box=1669,962,77,34]: Risco
+    - generic [ref=e99] [box=1762,962,102,34]: Nutrição
+    - generic [ref=e100] [box=1880,962,128,34]: Metabolismo
+    - generic [ref=e101] [box=2023,962,102,34]: Check-up
+    - generic [ref=e102] [box=2142,962,145,34]: Bioimpedancia
+    - generic [ref=e103] [box=2302,962,60,34]: VO2
+    - generic [ref=e104] [box=2378,962,60,34]: HRV
+    - generic [ref=e105] [box=2453,962,94,34]: Glicose
+    - generic [ref=e106] [box=2563,962,68,34]: Sono
+    - generic [ref=e107] [box=2647,962,77,34]: Forca
+    - generic [ref=e108] [box=2740,962,77,34]: Risco
+    - generic [ref=e109] [box=2832,962,102,34]: Nutrição
+    - generic [ref=e110] [box=2950,962,128,34]: Metabolismo
+    - generic [ref=e111] [box=3094,962,102,34]: Check-up
+  - generic [ref=e113] [box=316,1141,1280,450]:
+    - generic [ref=e114] [box=336,1169,768,176]:
+      - paragraph [ref=e115] [box=336,1169,768,16]: o problema
+      - heading "Academias geram dados, mas ainda vendem acompanhamento no escuro." [level=2] [ref=e116] [box=336,1201,768,144]
+    - generic [ref=e117] [box=336,1365,1240,226]:
+      - generic [ref=e118] [box=336,1393,400,226]:
+        - generic [ref=e119] [box=357,1414,358,40]
+        - paragraph [ref=e127] [box=357,1474,358,20]: Retenção
+        - paragraph [ref=e128] [box=357,1502,358,36]: + risco
+        - paragraph [ref=e129] [box=357,1550,358,48]: Sem leitura clínica, sinais de queda de evolução aparecem tarde demais.
+      - generic [ref=e130] [box=756,1393,400,226]:
+        - generic [ref=e131] [box=777,1414,358,40]
+        - paragraph [ref=e138] [box=777,1474,358,20]: Prescrição
+        - paragraph [ref=e139] [box=777,1502,358,36]: fragmentada
+        - paragraph [ref=e140] [box=777,1550,358,48]: Treino, nutrição e exames ficam separados em ferramentas e conversas.
+      - generic [ref=e141] [box=1176,1393,400,226]:
+        - generic [ref=e142] [box=1197,1414,358,40]
+        - paragraph [ref=e148] [box=1197,1474,358,20]: Percepção
+        - paragraph [ref=e149] [box=1197,1502,358,36]: baixo valor
+        - paragraph [ref=e150] [box=1197,1550,358,48]: O aluno não vê claramente o progresso fisiológico que está comprando.
+  - generic [ref=e152] [box=316,1848,1280,464]:
+    - generic [ref=e153] [box=336,1876,507,464]:
+      - paragraph [ref=e154] [box=336,1876,507,16]: a solução
+      - heading "Um sistema operacional de performance médica." [level=2] [ref=e155] [box=336,1908,507,96]
+      - paragraph [ref=e156] [box=336,2028,507,96]: O LifeCare organiza dados clínicos, sinais de recuperação, evolução de treino e alertas de risco para transformar acompanhamento em decisão prática.
+    - generic [ref=e157] [box=891,1848,685,464]:
+      - generic [ref=e159] [box=891,1876,335,238]:
+        - img [ref=e161] [box=928,1913,20,20]
+        - heading "Avaliação metabólica" [level=3] [ref=e163] [box=916,1965,285,28]
+        - paragraph [ref=e164] [box=916,2005,285,84]: Exames, bioimpedância e marcadores-chave interpretados em uma linha de evolução.
+      - generic [ref=e166] [box=1241,1876,335,238]:
+        - img [ref=e168] [box=1278,1913,20,20]
+        - heading "Dados contínuos" [level=3] [ref=e173] [box=1266,1965,285,28]
+        - paragraph [ref=e174] [box=1266,2005,285,56]: Sono, recuperação, frequência e adesão conectados ao plano.
+      - generic [ref=e176] [box=891,2130,335,210]:
+        - img [ref=e178] [box=928,2167,20,20]
+        - heading "Leitura médica" [level=3] [ref=e182] [box=916,2219,285,28]
+        - paragraph [ref=e183] [box=916,2259,285,56]: Critérios clínicos para orientar condutas e reduzir risco.
+      - generic [ref=e185] [box=1241,2130,335,210]:
+        - img [ref=e187] [box=1278,2167,20,20]
+        - heading "Performance visível" [level=3] [ref=e190] [box=1266,2219,285,28]
+        - paragraph [ref=e191] [box=1266,2259,285,56]: Relatórios simples para equipe e aluno entenderem progresso.
+  - generic [ref=e193] [box=316,2569,1280,546]:
+    - generic [ref=e194] [box=572,2597,768,128]:
+      - paragraph [ref=e195] [box=572,2597,768,16]: dashboard
+      - 'heading "Animação com propósito: dados que se movem quando viram decisão." [level=2] [ref=e196] [box=572,2629,768,96]'
+    - generic [ref=e197] [box=336,2753,1240,362]:
+      - generic [ref=e199] [box=336,2781,678,362]:
+        - generic [ref=e200] [box=361,2806,628,56]
+        - img [ref=e207] [box=361,2894,628,224]
+      - generic [ref=e210] [box=1034,2753,542,362]:
+        - generic [ref=e213] [box=1059,2806,492,82]
+        - generic [ref=e221] [box=1034,2965,542,146]
+  - generic [ref=e229] [box=316,3371,1280,440]:
+    - generic [ref=e230] [box=336,3399,768,128]:
+      - paragraph [ref=e231] [box=336,3399,768,16]: processo
+      - heading "Do primeiro exame ao plano de ação em quatro movimentos." [level=2] [ref=e232] [box=336,3431,768,96]
+    - generic [ref=e233] [box=336,3555,1240,256]:
+      - generic [ref=e235] [box=336,3583,298,256]:
+        - text: "01"
+        - heading "Coleta" [level=3] [ref=e236] [box=361,3672,248,32]
+        - paragraph [ref=e237] [box=361,3720,248,56]: Integra exames, avaliação física e dados de rotina.
+      - generic [ref=e239] [box=650,3583,298,256]:
+        - text: "02"
+        - heading "Interpretação" [level=3] [ref=e240] [box=675,3672,248,32]
+        - paragraph [ref=e241] [box=675,3720,248,56]: Transforma indicadores em risco, prioridade e oportunidade.
+      - generic [ref=e243] [box=964,3583,298,256]:
+        - text: "03"
+        - heading "Plano" [level=3] [ref=e244] [box=989,3672,248,32]
+        - paragraph [ref=e245] [box=989,3720,248,56]: Gera condutas para treino, nutrição e acompanhamento.
+      - generic [ref=e247] [box=1278,3583,298,256]:
+        - text: "04"
+        - heading "Evolução" [level=3] [ref=e248] [box=1303,3672,248,32]
+        - paragraph [ref=e249] [box=1303,3720,248,56]: Monitora adesão, resposta e necessidade de ajuste.
+  - generic [ref=e251] [box=316,4067,1280,398]:
+    - generic [ref=e252] [box=572,4095,768,128]:
+      - paragraph [ref=e253] [box=572,4095,768,16]: tecnologias
+      - heading "Camada médica, dados e experiência para uma operação premium." [level=2] [ref=e254] [box=572,4127,768,96]
+    - generic [ref=e255] [box=336,4243,1240,222]:
+      - generic [ref=e257] [box=336,4271,400,222]:
+        - img [ref=e258] [box=365,4300,28,28]
+        - heading "Biomarcadores" [level=3] [ref=e270] [box=365,4360,342,32]
+        - paragraph [ref=e271] [box=365,4408,342,56]: Leitura longitudinal de metabolismo, composição e risco.
+      - generic [ref=e273] [box=756,4271,400,222]:
+        - img [ref=e274] [box=785,4300,28,28]
+        - heading "Automação" [level=3] [ref=e276] [box=785,4360,342,32]
+        - paragraph [ref=e277] [box=785,4408,342,56]: Sinaliza prioridades para equipe sem aumentar a carga operacional.
+      - generic [ref=e279] [box=1176,4271,400,222]:
+        - img [ref=e280] [box=1205,4300,28,28]
+        - heading "Performance" [level=3] [ref=e282] [box=1205,4360,342,32]
+        - paragraph [ref=e283] [box=1205,4408,342,56]: Cruza resposta fisiológica com evolução de treino.
+  - generic [ref=e285] [box=316,4722,1280,538]:
+    - generic [ref=e286] [box=336,4750,649,538]:
+      - paragraph [ref=e287] [box=336,4750,649,16]: demonstração
+      - heading "Veja como o LifeCare pode virar diferencial comercial da sua academia." [level=2] [ref=e288] [box=336,4782,649,144]
+      - paragraph [ref=e289] [box=336,4950,649,64]: Uma demonstração objetiva para entender sua operação, seus dados atuais e o primeiro fluxo de performance médica que pode ser implantado.
+      - generic [ref=e290] [box=336,5046,649,92]:
+        - generic [ref=e291] [box=336,5046,649,20]
+        - generic [ref=e295] [box=336,5082,649,20]
+        - generic [ref=e298] [box=336,5118,649,20]
+    - generic [ref=e304] [box=1050,4775,501,488]:
+      - generic [ref=e305] [box=1050,4775,501,76]:
+        - text: Nome
+        - textbox "Nome" [ref=e306] [box=1050,4803,501,48]
+      - generic [ref=e307] [box=1050,4867,501,76]:
+        - text: Email
+        - textbox "Email" [ref=e308] [box=1050,4895,501,48]
+      - generic [ref=e309] [box=1050,4959,501,76]:
+        - text: Academia
+        - textbox "Academia" [ref=e310] [box=1050,4987,501,48]
+      - generic [ref=e311] [box=1050,5051,501,140]:
+        - text: Principal objetivo
+        - textbox "Principal objetivo" [ref=e312] [box=1050,5079,501,112]:
+          - /placeholder: Retenção, ticket premium, acompanhamento médico, diferenciação...
+      - button "Solicitar demonstração" [ref=e313] [box=1050,5215,501,48]:
+        - text: Solicitar demonstração
+        - img [box=1378,5231,16,16]
+  - generic [ref=e315] [box=316,5421,1280,32]:
+    - generic [ref=e316] [box=336,5421,191,32]:
+      - img [ref=e318] [box=344,5429,16,16]
+      - generic [ref=e321] [box=380,5427,147,20]:
+        - strong [ref=e322] [box=380,5428,58,17]: LifeCare
+        - text: Performance
+    - generic [ref=e323] [box=1172,5427,404,20]: © 2026 LifeCare Performance. Todos os direitos reservados.

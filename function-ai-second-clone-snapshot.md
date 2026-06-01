@@ -1,0 +1,47 @@
+- generic [active] [ref=e1] [box=0,0,1425,15093]:
+  - generic [ref=e4] [box=0,0,1425,86]:
+    - link "Medical Intelligence" [ref=e5] [cursor=pointer] [box=72,24,182,38]:
+      - /url: "#hero"
+      - generic [ref=e6] [box=72,24,38,38]: MI
+      - generic [ref=e7] [box=122,33,132,21]: Medical Intelligence
+    - link "Join our team" [ref=e8] [cursor=pointer] [box=1262,33,91,21]:
+      - /url: "#careers"
+  - main [ref=e9] [box=0,0,1425,14850]:
+    - generic [ref=e11] [box=72,112,1281,552]:
+      - generic [ref=e12] [box=921,112,432,62]
+      - heading "B e f o r e t o d a y , o u r h e a l t h w a s i n t h e d a r k" [level=1] [ref=e31] [box=72,222,1050,442]
+    - generic [ref=e74] [box=72,2962,1281,1000]:
+      - heading "n o w , t h e r e i s M I ." [level=2] [ref=e75] [box=72,3295,1281,335]
+      - generic [ref=e93] [box=377,3755,672,47]
+    - generic [ref=e102] [box=0,4950,1425,2300]:
+      - heading "AI for humans" [level=2] [ref=e103] [box=403,5062,619,185]
+      - generic [ref=e104] [box=105,5727,1216,768]
+    - generic [ref=e129] [box=0,7250,1425,2100]:
+      - generic [ref=e130] [box=441,7362,544,382]
+      - generic [ref=e160] [box=86,7410,1252,1780]
+    - generic [ref=e174] [box=361,9766,704,368]:
+      - heading "U n d e r s t a n d w h a t ' s y e t t o b e u n d e r s t o o d ." [level=2] [ref=e175] [box=361,9766,704,278]
+      - paragraph [ref=e215] [box=457,10076,512,58]: Top clinicians, the newest AI, and your unique biology turn complexity into clarity.
+    - generic [ref=e216] [box=0,10550,1425,2200]:
+      - generic [ref=e217] [box=72,11247,1152,266]
+      - generic [ref=e221] [box=201,11663,1152,200]
+      - generic [ref=e225] [box=72,12013,1152,200]
+    - heading "F o r a l l o f u s" [level=2] [ref=e230] [box=72,12862,1281,143]:
+      - generic [ref=e231] [box=299,13012,95,143]: F
+      - generic [ref=e232] [box=394,13012,85,143]: o
+      - generic [ref=e233] [box=479,13012,65,143]: r
+      - generic [ref=e235] [box=583,13012,80,143]: a
+      - generic [ref=e236] [box=662,13012,45,143]: l
+      - generic [ref=e237] [box=708,13012,45,143]: l
+      - generic [ref=e239] [box=791,13012,85,143]: o
+      - generic [ref=e240] [box=877,13012,52,143]: f
+      - generic [ref=e242] [box=966,13012,91,143]: u
+      - generic [ref=e243] [box=1057,13012,68,143]: s
+    - generic [ref=e245] [box=0,13850,1425,1000]:
+      - generic [ref=e246] [box=72,14354,1137,384]
+      - link "Functionhealth.com" [ref=e293] [cursor=pointer] [box=1257,14642,81,81]:
+        - /url: https://www.functionhealth.com/
+  - contentinfo [ref=e294] [box=0,14850,1425,243]:
+    - generic [ref=e295] [box=22,14872,1382,200]:
+      - paragraph [ref=e296] [box=54,15022,356,18]: © 2026 Function Health Inc. All rights reserved.
+      - generic [ref=e297] [box=1100,15022,271,18]

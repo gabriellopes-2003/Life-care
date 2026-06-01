@@ -1,0 +1,6 @@
+- generic [active] [ref=e1] [box=0,0,914,18460]:
+  - img [ref=e9] [box=447,57,54,43]
+  - generic [ref=e29] [box=-10000,-10000,1796,309]: giItT1WQy@!-/#
+  - generic [ref=e30] [box=-10000,-10000,1796,313]: giItT1WQy@!-/#
+  - generic [ref=e31] [box=-10000,-10000,1796,309]: giItT1WQy@!-/#
+  - generic [ref=e32] [box=-10000,-10000,1796,313]: giItT1WQy@!-/#

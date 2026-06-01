@@ -1,0 +1,959 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Premium Health-Tech Light Theme */
+  --background: oklch(0.985 0.002 90);
+  --foreground: oklch(0.20 0.02 250);
+  
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.02 250);
+  
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.02 250);
+  
+  /* Primary - Soft Blue/Cyan for data visualization */
+  --primary: oklch(0.60 0.15 220);
+  --primary-foreground: oklch(1 0 0);
+  
+  /* Secondary - Warm neutral */
+  --secondary: oklch(0.96 0.005 80);
+  --secondary-foreground: oklch(0.30 0.02 250);
+  
+  /* Muted - Soft gray */
+  --muted: oklch(0.94 0.005 90);
+  --muted-foreground: oklch(0.50 0.01 250);
+  
+  /* Accent - Restrained Gold */
+  --accent: oklch(0.75 0.12 85);
+  --accent-foreground: oklch(0.25 0.03 85);
+  
+  --destructive: oklch(0.60 0.20 25);
+  --destructive-foreground: oklch(1 0 0);
+  
+  --border: oklch(0.90 0.01 90);
+  --input: oklch(0.92 0.01 90);
+  --ring: oklch(0.60 0.15 220);
+  
+  /* Chart Colors - Health Data Palette */
+  --chart-1: oklch(0.65 0.18 220);
+  --chart-2: oklch(0.70 0.15 175);
+  --chart-3: oklch(0.75 0.12 85);
+  --chart-4: oklch(0.55 0.12 280);
+  --chart-5: oklch(0.60 0.15 150);
+  
+  --radius: 0.75rem;
+  
+  --sidebar: oklch(0.98 0.002 90);
+  --sidebar-foreground: oklch(0.20 0.02 250);
+  --sidebar-primary: oklch(0.60 0.15 220);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.94 0.005 90);
+  --sidebar-accent-foreground: oklch(0.30 0.02 250);
+  --sidebar-border: oklch(0.90 0.01 90);
+  --sidebar-ring: oklch(0.60 0.15 220);
+  
+  /* Custom LifeCare tokens */
+  --cyan: oklch(0.70 0.15 195);
+  --cyan-light: oklch(0.92 0.05 195);
+  --gold: oklch(0.75 0.12 85);
+  --gold-light: oklch(0.92 0.05 85);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.65 0.18 220);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.75 0.12 85);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.65 0.18 220);
+  --chart-2: oklch(0.70 0.15 175);
+  --chart-3: oklch(0.75 0.12 85);
+  --chart-4: oklch(0.55 0.12 280);
+  --chart-5: oklch(0.60 0.15 150);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.65 0.18 220);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* Keep the public site in the planned light premium direction, even when a browser
+   or preview environment injects a dark theme class. */
+html.dark,
+.dark {
+  --background: oklch(0.985 0.002 90);
+  --foreground: oklch(0.20 0.02 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.02 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.02 250);
+  --primary: oklch(0.60 0.15 220);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.005 80);
+  --secondary-foreground: oklch(0.30 0.02 250);
+  --muted: oklch(0.94 0.005 90);
+  --muted-foreground: oklch(0.50 0.01 250);
+  --accent: oklch(0.75 0.12 85);
+  --accent-foreground: oklch(0.25 0.03 85);
+  --destructive: oklch(0.60 0.20 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.90 0.01 90);
+  --input: oklch(0.92 0.01 90);
+  --ring: oklch(0.60 0.15 220);
+  --chart-1: oklch(0.65 0.18 220);
+  --chart-2: oklch(0.70 0.15 175);
+  --chart-3: oklch(0.75 0.12 85);
+  --chart-4: oklch(0.55 0.12 280);
+  --chart-5: oklch(0.60 0.15 150);
+  --sidebar: oklch(0.98 0.002 90);
+  --sidebar-foreground: oklch(0.20 0.02 250);
+  --sidebar-primary: oklch(0.60 0.15 220);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.94 0.005 90);
+  --sidebar-accent-foreground: oklch(0.30 0.02 250);
+  --sidebar-border: oklch(0.90 0.01 90);
+  --sidebar-ring: oklch(0.60 0.15 220);
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-cyan: var(--cyan);
+  --color-cyan-light: var(--cyan-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Premium smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes lifecare-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lifecare-nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lifecare-float-panel {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes lifecare-scan {
+  0% {
+    transform: translateX(-115%);
+    opacity: 0;
+  }
+  14%, 72% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(115%);
+    opacity: 0;
+  }
+}
+
+@keyframes lifecare-pulse-soft {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 22%, transparent);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 9px color-mix(in oklch, var(--primary) 0%, transparent);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes lifecare-chip-breathe {
+  0%, 100% {
+    border-color: var(--border);
+    transform: translateY(0);
+  }
+  50% {
+    border-color: color-mix(in oklch, var(--primary) 34%, var(--border));
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes lifecare-ambient-shift {
+  0%, 100% {
+    opacity: 0.38;
+    transform: translate3d(-2%, 0, 0);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translate3d(2%, -1%, 0);
+  }
+}
+
+@keyframes lifecare-ribbon-glow {
+  0%, 100% {
+    background-color: var(--card);
+  }
+  50% {
+    background-color: color-mix(in oklch, var(--cyan-light) 58%, var(--card));
+  }
+}
+
+@keyframes lifecare-node-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 8px var(--foreground), 0 0 0 0 color-mix(in oklch, var(--primary) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 8px var(--foreground), 0 0 28px 0 color-mix(in oklch, var(--primary) 38%, transparent);
+  }
+}
+
+.lifecare-reveal {
+  animation: lifecare-rise 0.72s ease-out both;
+}
+
+.lifecare-clip-stage {
+  contain: paint;
+}
+
+.lifecare-nav {
+  animation: lifecare-nav-drop 0.55s ease-out both;
+}
+
+.lifecare-timeline-step {
+  transform: translateY(0);
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    background-color 0.45s ease;
+}
+
+.lifecare-timeline-step:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklch, var(--primary) 38%, transparent);
+  background-color: color-mix(in oklch, var(--background) 7%, transparent);
+}
+
+.lifecare-timeline-node {
+  animation: lifecare-node-glow 3.8s ease-in-out infinite;
+}
+
+.lifecare-result-badge {
+  transition:
+    transform 0.45s ease,
+    background-color 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.lifecare-timeline-step:hover .lifecare-result-badge {
+  transform: translateX(4px);
+  border-color: color-mix(in oklch, var(--primary) 32%, transparent);
+  background-color: color-mix(in oklch, var(--background) 9%, transparent);
+}
+
+@supports (animation-timeline: view()) {
+  .lifecare-timeline-step {
+    animation: lifecare-rise 0.72s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 28%;
+  }
+}
+
+.lifecare-ambient-flow {
+  background:
+    linear-gradient(112deg, transparent 0%, color-mix(in oklch, var(--primary) 6%, transparent) 38%, transparent 62%),
+    linear-gradient(20deg, transparent 0%, color-mix(in oklch, var(--cyan) 8%, transparent) 74%, transparent 100%);
+  animation: lifecare-ambient-shift 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lifecare-dashboard {
+  isolation: isolate;
+}
+
+.hero-dashboard-loop {
+  animation: lifecare-float-panel 7.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-dashboard-loop.bg-card {
+  border-color: color-mix(in oklch, var(--primary) 28%, transparent);
+  background:
+    radial-gradient(circle at 18% 12%, color-mix(in oklch, var(--primary) 18%, transparent), transparent 18rem),
+    radial-gradient(circle at 86% 78%, color-mix(in oklch, var(--cyan) 14%, transparent), transparent 16rem),
+    oklch(0.16 0.025 250);
+  color: oklch(0.98 0.004 90);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.26);
+}
+
+.hero-dashboard-loop::after {
+  opacity: 0.1;
+}
+
+.hero-dashboard-loop .bg-muted\/60 {
+  background: color-mix(in oklch, white 7%, transparent);
+}
+
+.hero-dashboard-loop .text-muted-foreground {
+  color: color-mix(in oklch, white 62%, transparent);
+}
+
+.hero-dashboard-loop .text-foreground,
+.hero-dashboard-loop .font-medium {
+  color: oklch(0.98 0.004 90);
+}
+
+.hero-dashboard-loop .bg-background,
+.hero-dashboard-loop .bg-card {
+  border-color: color-mix(in oklch, white 12%, transparent);
+  background: color-mix(in oklch, oklch(0.20 0.024 250) 88%, transparent);
+  color: oklch(0.98 0.004 90);
+}
+
+.hero-dashboard-loop .stroke-border {
+  stroke: color-mix(in oklch, white 16%, transparent);
+}
+
+.lifecare-dashboard::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: linear-gradient(135deg, transparent 0%, color-mix(in oklch, var(--cyan-light) 44%, transparent) 100%);
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+.lifecare-scanline {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--primary) 10%, transparent), transparent);
+  animation: lifecare-scan 5.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lifecare-side-scan {
+  animation: lifecare-pulse-soft 3.6s ease-in-out infinite;
+}
+
+.lifecare-heart,
+.lifecare-icon-pulse {
+  animation: lifecare-pulse-soft 3.2s ease-in-out infinite;
+}
+
+.lifecare-badge {
+  animation:
+    lifecare-rise 0.72s ease-out both,
+    lifecare-chip-breathe 4s ease-in-out 1s infinite;
+}
+
+.lifecare-motion-card {
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.lifecare-motion-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in oklch, var(--primary) 30%, var(--border));
+  box-shadow: 0 24px 70px rgba(27, 43, 67, 0.11);
+}
+
+.lifecare-data-chip {
+  animation: lifecare-chip-breathe 4.6s ease-in-out infinite;
+}
+
+.lifecare-data-chip:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.lifecare-data-chip:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+.lifecare-data-chip:nth-child(4) {
+  animation-delay: 1.05s;
+}
+
+.lifecare-ribbon-chip {
+  animation: lifecare-ribbon-glow 5.5s ease-in-out infinite;
+}
+
+.lifecare-ribbon-chip:nth-child(3n) {
+  animation-delay: 0.8s;
+}
+
+.lifecare-ribbon-chip:nth-child(4n) {
+  animation-delay: 1.4s;
+}
+
+.lifecare-chart-line {
+  filter: drop-shadow(0 0 8px color-mix(in oklch, var(--primary) 28%, transparent));
+}
+
+.lifecare-chart-dot {
+  animation: lifecare-pulse-soft 2.7s ease-in-out infinite;
+}
+
+.lifecare-chart-dot:nth-of-type(2) {
+  animation-delay: 0.35s;
+}
+
+.lifecare-chart-dot:nth-of-type(3) {
+  animation-delay: 0.7s;
+}
+
+.lifecare-ring {
+  filter: drop-shadow(0 0 12px color-mix(in oklch, var(--primary) 18%, transparent));
+}
+
+.dashboard-scroll-story {
+  background:
+    radial-gradient(circle at 78% 18%, color-mix(in oklch, var(--primary) 18%, transparent), transparent 28rem),
+    radial-gradient(circle at 16% 72%, color-mix(in oklch, var(--cyan) 12%, transparent), transparent 24rem),
+    var(--foreground);
+}
+
+.dashboard-depth-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--background) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--background) 6%, transparent) 1px, transparent 1px);
+  background-size: 82px 82px;
+  mask-image: radial-gradient(circle at 68% 48%, black 0%, transparent 72%);
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.dashboard-scroll-progress {
+  position: sticky;
+  top: 16vh;
+  z-index: 4;
+  float: right;
+  width: 3px;
+  height: 68vh;
+  margin-right: clamp(1rem, 3vw, 3rem);
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--background) 12%, transparent);
+}
+
+.dashboard-scroll-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, var(--primary), var(--cyan), var(--accent));
+  box-shadow: 0 0 26px color-mix(in oklch, var(--primary) 62%, transparent);
+}
+
+.dashboard-scroll-pin {
+  min-height: 100svh;
+  overflow: clip;
+}
+
+.dashboard-static-story .dashboard-scroll-pin {
+  min-height: auto;
+  overflow: visible;
+}
+
+.dashboard-static-story .dashboard-scroll-progress {
+  display: none;
+}
+
+.dashboard-static-story .dashboard-view:first-child {
+  pointer-events: auto;
+}
+
+.dashboard-story-step {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-story-step::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  content: "";
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dashboard-story-step:hover::before {
+  opacity: 1;
+}
+
+.dashboard-step-dot {
+  box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 30%, transparent);
+  animation: lifecare-pulse-soft 2.8s ease-in-out infinite;
+}
+
+.dashboard-device {
+  position: relative;
+  z-index: 4;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.dashboard-stage {
+  isolation: isolate;
+  perspective: 1200px;
+  min-height: clamp(36rem, 68vh, 48rem);
+  display: grid;
+  align-items: center;
+}
+
+.dashboard-stage::before {
+  position: absolute;
+  inset: -8% -5% -10% 16%;
+  z-index: 0;
+  content: "";
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in oklch, var(--primary) 22%, transparent), transparent 68%);
+  filter: blur(22px);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.dashboard-orbit-card {
+  position: absolute;
+  z-index: 2;
+  max-width: 9.8rem;
+  min-width: 9.25rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid color-mix(in oklch, var(--background) 20%, transparent);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--background) 82%, transparent);
+  color: var(--foreground);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(16px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.dashboard-orbit-card p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.dashboard-orbit-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.85rem;
+  line-height: 1;
+}
+
+.dashboard-orbit-card span {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+}
+
+.dashboard-orbit-card-a {
+  top: 3%;
+  left: 2%;
+}
+
+.dashboard-orbit-card-b {
+  right: 1%;
+  top: 18%;
+}
+
+.dashboard-orbit-card-c {
+  bottom: 1%;
+  left: 10%;
+}
+
+.dashboard-screen-stage {
+  background:
+    linear-gradient(to right, color-mix(in oklch, var(--primary) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--primary) 6%, transparent) 1px, transparent 1px),
+    var(--card);
+  background-size: 58px 58px;
+  min-height: clamp(31rem, 57vh, 35rem);
+}
+
+.dashboard-screen-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in oklch, var(--cyan) 16%, transparent), transparent 18rem),
+    radial-gradient(circle at 84% 74%, color-mix(in oklch, var(--primary) 18%, transparent), transparent 18rem);
+  pointer-events: none;
+}
+
+.dashboard-signal-cloud {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dashboard-signal-cloud span {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 26%, var(--border));
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--background) 80%, transparent);
+  padding: 0 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  box-shadow: 0 12px 34px color-mix(in oklch, var(--primary) 12%, transparent);
+  will-change: transform;
+}
+
+.dashboard-signal-cloud span:nth-child(1) {
+  left: 5%;
+  top: 18%;
+}
+
+.dashboard-signal-cloud span:nth-child(2) {
+  right: 9%;
+  top: 14%;
+}
+
+.dashboard-signal-cloud span:nth-child(3) {
+  left: 48%;
+  top: 44%;
+}
+
+.dashboard-signal-cloud span:nth-child(4) {
+  right: 12%;
+  bottom: 18%;
+}
+
+.dashboard-signal-cloud span:nth-child(5) {
+  left: 9%;
+  bottom: 16%;
+}
+
+.dashboard-signal-cloud span:nth-child(6) {
+  right: 34%;
+  bottom: 7%;
+}
+
+.dashboard-view {
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.dashboard-view[data-view="0"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.dashboard-view-inner {
+  min-height: 0;
+}
+
+.dashboard-chart-wrap {
+  filter: drop-shadow(0 18px 28px color-mix(in oklch, var(--primary) 12%, transparent));
+}
+
+.dashboard-micro-card,
+.dashboard-chip {
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.dashboard-micro-card:hover,
+.dashboard-chip:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--primary) 32%, var(--border));
+}
+
+@keyframes dashboard-signal-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0.45rem, -0.55rem, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard-scroll-story {
+    min-height: auto;
+  }
+
+  .dashboard-scroll-progress,
+  .dashboard-orbit-card {
+    display: none;
+  }
+
+  .dashboard-scroll-pin {
+    position: relative;
+    display: block;
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .dashboard-screen-stage {
+    min-height: 680px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .dashboard-scroll-story {
+    min-height: auto;
+  }
+
+  .dashboard-scroll-pin {
+    position: relative;
+    display: block;
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .dashboard-stage {
+    min-height: auto;
+  }
+
+  .dashboard-scroll-progress,
+  .dashboard-orbit-card {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-signal-cloud span,
+  .dashboard-step-dot,
+  .lifecare-data-chip,
+  .lifecare-dashboard,
+  .lifecare-heart,
+  .lifecare-icon-pulse {
+    animation: none;
+  }
+
+  .dashboard-scroll-story {
+    min-height: auto;
+  }
+
+  .dashboard-scroll-pin {
+    position: relative;
+    min-height: auto;
+  }
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* LifeCare hero interface effects */
+.hero-data-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--primary) 16%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--primary) 12%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 72%, transparent 100%);
+}
+
+.hero-telemetry {
+  position: absolute;
+  inset: 9rem clamp(1rem, 5vw, 5rem) auto auto;
+  z-index: 1;
+  display: grid;
+  width: min(18rem, calc(100vw - 2rem));
+  gap: 0.7rem;
+  pointer-events: none;
+}
+
+.hero-telemetry-chip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.8rem;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid color-mix(in oklch, var(--primary) 18%, var(--border));
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--background) 78%, transparent);
+  padding: 0.72rem 0.9rem;
+  color: var(--foreground);
+  box-shadow: 0 16px 44px color-mix(in oklch, var(--primary) 10%, transparent);
+  backdrop-filter: blur(18px);
+  animation: hero-telemetry-float 5.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-telemetry-chip:nth-child(2) {
+  justify-self: end;
+}
+
+.hero-telemetry-chip:nth-child(3) {
+  margin-left: 2.5rem;
+}
+
+.hero-telemetry-chip span {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.hero-telemetry-chip strong {
+  font-size: 1.35rem;
+  line-height: 1;
+  text-align: right;
+}
+
+.hero-telemetry-chip small {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  color: var(--primary);
+}
+
+@keyframes hero-telemetry-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0.4rem, -0.55rem, 0);
+  }
+}
+
+.hero-chart-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--border) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--border) 70%, transparent) 1px, transparent 1px);
+  background-size: 42px 34px;
+}
+
+.hero-scan {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--primary) 4%, transparent) 22%,
+    color-mix(in oklch, var(--cyan) 22%, transparent) 52%,
+    color-mix(in oklch, var(--primary) 5%, transparent) 78%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  .hero-telemetry {
+    display: none;
+  }
+}
