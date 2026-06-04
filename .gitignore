@@ -19,6 +19,11 @@ node_modules
 *.out.log
 *.err.log
 *.png
+!public/lifecare-cases/
+!public/lifecare-cases/fhf-image10.png
+!public/lifecare-assets/
+!public/lifecare-assets/metabolic-alert-scan.png
+!public/lifecare-assets/digital-twin-visbody.png
 local-next-server.js
 local-static-next-server.js
 .playwright-mcp/

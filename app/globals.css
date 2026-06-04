@@ -4,49 +4,49 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Premium Health-Tech Light Theme */
-  --background: oklch(0.985 0.002 90);
-  --foreground: oklch(0.20 0.02 250);
+  /* LifeCare Instagram-aligned dark performance palette */
+  --background: #0A0D1A;
+  --foreground: #FFFFFF;
   
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.20 0.02 250);
+  --card: #1A1A2E;
+  --card-foreground: #FFFFFF;
   
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.02 250);
   
-  /* Primary - Soft Blue/Cyan for data visualization */
-  --primary: oklch(0.60 0.15 220);
-  --primary-foreground: oklch(1 0 0);
+  /* Primary - calm clinical blue for decisions and data */
+  --primary: #00B4D8;
+  --primary-foreground: #0A0D1A;
   
   /* Secondary - Warm neutral */
-  --secondary: oklch(0.96 0.005 80);
-  --secondary-foreground: oklch(0.30 0.02 250);
+  --secondary: #0D1B2A;
+  --secondary-foreground: #FFFFFF;
   
   /* Muted - Soft gray */
-  --muted: oklch(0.94 0.005 90);
-  --muted-foreground: oklch(0.50 0.01 250);
+  --muted: #0D1B2A;
+  --muted-foreground: rgba(255,255,255,0.62);
   
-  /* Accent - Restrained Gold */
-  --accent: oklch(0.75 0.12 85);
-  --accent-foreground: oklch(0.25 0.03 85);
+  /* Accent - restrained mineral gold */
+  --accent: #C9A84C;
+  --accent-foreground: #0A0D1A;
   
-  --destructive: oklch(0.60 0.20 25);
-  --destructive-foreground: oklch(1 0 0);
+  --destructive: #CC2200;
+  --destructive-foreground: #FFFFFF;
   
-  --border: oklch(0.90 0.01 90);
-  --input: oklch(0.92 0.01 90);
-  --ring: oklch(0.60 0.15 220);
+  --border: rgba(255,255,255,0.12);
+  --input: rgba(255,255,255,0.14);
+  --ring: #00B4D8;
   
   /* Chart Colors - Health Data Palette */
-  --chart-1: oklch(0.65 0.18 220);
-  --chart-2: oklch(0.70 0.15 175);
-  --chart-3: oklch(0.75 0.12 85);
-  --chart-4: oklch(0.55 0.12 280);
-  --chart-5: oklch(0.60 0.15 150);
+  --chart-1: oklch(0.68 0.15 205);
+  --chart-2: oklch(0.72 0.12 166);
+  --chart-3: oklch(0.74 0.10 78);
+  --chart-4: oklch(0.66 0.10 258);
+  --chart-5: oklch(0.68 0.11 142);
   
-  --radius: 0.75rem;
+  --radius: 0.6rem;
   
-  --sidebar: oklch(0.98 0.002 90);
+  --sidebar: oklch(0.972 0.012 82);
   --sidebar-foreground: oklch(0.20 0.02 250);
   --sidebar-primary: oklch(0.60 0.15 220);
   --sidebar-primary-foreground: oklch(1 0 0);
@@ -56,10 +56,14 @@
   --sidebar-ring: oklch(0.60 0.15 220);
   
   /* Custom LifeCare tokens */
-  --cyan: oklch(0.70 0.15 195);
-  --cyan-light: oklch(0.92 0.05 195);
-  --gold: oklch(0.75 0.12 85);
-  --gold-light: oklch(0.92 0.05 85);
+  --cyan: oklch(0.68 0.12 190);
+  --cyan-light: oklch(0.90 0.038 190);
+  --gold: oklch(0.71 0.09 78);
+  --gold-light: oklch(0.90 0.035 78);
+  --ink: oklch(0.13 0.018 248);
+  --ink-soft: oklch(0.18 0.022 248);
+  --ink-card: oklch(0.22 0.025 248);
+  --dashboard-line: color-mix(in oklch, var(--primary) 48%, white 18%);
 }
 
 .dark {
@@ -101,31 +105,31 @@
    or preview environment injects a dark theme class. */
 html.dark,
 .dark {
-  --background: oklch(0.985 0.002 90);
-  --foreground: oklch(0.20 0.02 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.20 0.02 250);
+  --background: #0A0D1A;
+  --foreground: #FFFFFF;
+  --card: #1A1A2E;
+  --card-foreground: #FFFFFF;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.02 250);
-  --primary: oklch(0.60 0.15 220);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0.005 80);
-  --secondary-foreground: oklch(0.30 0.02 250);
-  --muted: oklch(0.94 0.005 90);
-  --muted-foreground: oklch(0.50 0.01 250);
-  --accent: oklch(0.75 0.12 85);
-  --accent-foreground: oklch(0.25 0.03 85);
-  --destructive: oklch(0.60 0.20 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.90 0.01 90);
-  --input: oklch(0.92 0.01 90);
-  --ring: oklch(0.60 0.15 220);
-  --chart-1: oklch(0.65 0.18 220);
-  --chart-2: oklch(0.70 0.15 175);
-  --chart-3: oklch(0.75 0.12 85);
-  --chart-4: oklch(0.55 0.12 280);
-  --chart-5: oklch(0.60 0.15 150);
-  --sidebar: oklch(0.98 0.002 90);
+  --primary: #00B4D8;
+  --primary-foreground: #0A0D1A;
+  --secondary: #0D1B2A;
+  --secondary-foreground: #FFFFFF;
+  --muted: #0D1B2A;
+  --muted-foreground: rgba(255,255,255,0.62);
+  --accent: #C9A84C;
+  --accent-foreground: #0A0D1A;
+  --destructive: #CC2200;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(255,255,255,0.12);
+  --input: rgba(255,255,255,0.14);
+  --ring: #00B4D8;
+  --chart-1: oklch(0.68 0.15 205);
+  --chart-2: oklch(0.72 0.12 166);
+  --chart-3: oklch(0.74 0.10 78);
+  --chart-4: oklch(0.66 0.10 258);
+  --chart-5: oklch(0.68 0.11 142);
+  --sidebar: oklch(0.972 0.012 82);
   --sidebar-foreground: oklch(0.20 0.02 250);
   --sidebar-primary: oklch(0.60 0.15 220);
   --sidebar-primary-foreground: oklch(1 0 0);
@@ -301,6 +305,14 @@ html {
 
 .lifecare-nav {
   animation: lifecare-nav-drop 0.55s ease-out both;
+  box-shadow: 0 18px 54px color-mix(in oklch, var(--foreground) 7%, transparent);
+}
+
+.lifecare-hero-surface {
+  background:
+    radial-gradient(circle at 74% 10%, color-mix(in oklch, var(--gold-light) 62%, transparent), transparent 21rem),
+    radial-gradient(circle at 12% 30%, color-mix(in oklch, var(--cyan-light) 56%, transparent), transparent 24rem),
+    linear-gradient(135deg, var(--background) 0%, oklch(0.955 0.018 82) 52%, oklch(0.925 0.025 88) 100%);
 }
 
 .lifecare-timeline-step {
@@ -344,8 +356,8 @@ html {
 
 .lifecare-ambient-flow {
   background:
-    linear-gradient(112deg, transparent 0%, color-mix(in oklch, var(--primary) 6%, transparent) 38%, transparent 62%),
-    linear-gradient(20deg, transparent 0%, color-mix(in oklch, var(--cyan) 8%, transparent) 74%, transparent 100%);
+    linear-gradient(112deg, transparent 0%, color-mix(in oklch, var(--primary) 5%, transparent) 38%, transparent 62%),
+    linear-gradient(20deg, transparent 0%, color-mix(in oklch, var(--gold) 7%, transparent) 74%, transparent 100%);
   animation: lifecare-ambient-shift 9s ease-in-out infinite;
   pointer-events: none;
 }
@@ -360,13 +372,13 @@ html {
 }
 
 .hero-dashboard-loop.bg-card {
-  border-color: color-mix(in oklch, var(--primary) 28%, transparent);
+  border-color: color-mix(in oklch, white 11%, var(--primary));
   background:
-    radial-gradient(circle at 18% 12%, color-mix(in oklch, var(--primary) 18%, transparent), transparent 18rem),
-    radial-gradient(circle at 86% 78%, color-mix(in oklch, var(--cyan) 14%, transparent), transparent 16rem),
-    oklch(0.16 0.025 250);
+    radial-gradient(circle at 18% 12%, color-mix(in oklch, var(--primary) 21%, transparent), transparent 18rem),
+    radial-gradient(circle at 86% 78%, color-mix(in oklch, var(--gold) 14%, transparent), transparent 16rem),
+    linear-gradient(150deg, var(--ink) 0%, var(--ink-soft) 58%, oklch(0.115 0.016 248) 100%);
   color: oklch(0.98 0.004 90);
-  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 34px 90px rgba(20, 18, 16, 0.34);
 }
 
 .hero-dashboard-loop::after {
@@ -389,7 +401,7 @@ html {
 .hero-dashboard-loop .bg-background,
 .hero-dashboard-loop .bg-card {
   border-color: color-mix(in oklch, white 12%, transparent);
-  background: color-mix(in oklch, oklch(0.20 0.024 250) 88%, transparent);
+  background: color-mix(in oklch, var(--ink-card) 88%, transparent);
   color: oklch(0.98 0.004 90);
 }
 
@@ -402,8 +414,8 @@ html {
   inset: 0;
   z-index: -1;
   content: "";
-  background: linear-gradient(135deg, transparent 0%, color-mix(in oklch, var(--cyan-light) 44%, transparent) 100%);
-  opacity: 0.24;
+  background: linear-gradient(135deg, transparent 0%, color-mix(in oklch, var(--gold) 12%, transparent) 100%);
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -437,12 +449,49 @@ html {
     transform 0.45s ease,
     box-shadow 0.45s ease,
     border-color 0.45s ease;
+  box-shadow: inset 0 1px 0 color-mix(in oklch, white 68%, transparent);
 }
 
 .lifecare-motion-card:hover {
   transform: translateY(-5px);
   border-color: color-mix(in oklch, var(--primary) 30%, var(--border));
-  box-shadow: 0 24px 70px rgba(27, 43, 67, 0.11);
+  box-shadow: 0 24px 70px rgba(42, 35, 25, 0.12);
+}
+
+.bg-muted\/35 {
+  background:
+    radial-gradient(circle at 10% 0%, color-mix(in oklch, var(--gold-light) 38%, transparent), transparent 22rem),
+    color-mix(in oklch, var(--muted) 74%, transparent) !important;
+}
+
+.bg-card {
+  box-shadow: inset 0 1px 0 color-mix(in oklch, white 62%, transparent);
+}
+
+.bg-foreground {
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in oklch, var(--primary) 14%, transparent), transparent 26rem),
+    radial-gradient(circle at 85% 76%, color-mix(in oklch, var(--gold) 11%, transparent), transparent 24rem),
+    linear-gradient(155deg, var(--ink) 0%, var(--ink-soft) 58%, oklch(0.105 0.015 248) 100%) !important;
+}
+
+.text-background\/65 {
+  color: color-mix(in oklch, white 64%, transparent) !important;
+}
+
+.text-background\/60 {
+  color: color-mix(in oklch, white 58%, transparent) !important;
+}
+
+.text-background\/45,
+.text-background\/40 {
+  color: color-mix(in oklch, white 42%, transparent) !important;
+}
+
+a[href="#contato"].gsap-hover,
+button.gsap-hover,
+.lifecare-nav a[href="#contato"] {
+  box-shadow: 0 14px 34px color-mix(in oklch, var(--primary) 18%, transparent);
 }
 
 .lifecare-data-chip {
@@ -765,6 +814,99 @@ html {
   border-color: color-mix(in oklch, var(--primary) 32%, var(--border));
 }
 
+/* Dark product surfaces inspired by premium health apps: data should feel like software, not decoration. */
+.dashboard-scroll-story {
+  background:
+    radial-gradient(circle at 18% 16%, color-mix(in oklch, var(--primary) 16%, transparent), transparent 26rem),
+    radial-gradient(circle at 82% 70%, color-mix(in oklch, var(--gold) 10%, transparent), transparent 24rem),
+    linear-gradient(155deg, oklch(0.115 0.018 248) 0%, oklch(0.16 0.021 248) 54%, oklch(0.10 0.016 248) 100%);
+}
+
+.dashboard-story-step {
+  border-color: color-mix(in oklch, white 11%, transparent) !important;
+  background: color-mix(in oklch, white 4%, transparent) !important;
+}
+
+.dashboard-story-step:hover {
+  background: color-mix(in oklch, white 7%, transparent) !important;
+}
+
+.dashboard-stage::before {
+  background:
+    radial-gradient(circle at 45% 36%, color-mix(in oklch, var(--primary) 24%, transparent), transparent 58%),
+    radial-gradient(circle at 68% 62%, color-mix(in oklch, var(--gold) 13%, transparent), transparent 62%);
+}
+
+.dashboard-device {
+  border-color: color-mix(in oklch, white 10%, transparent) !important;
+  background:
+    linear-gradient(145deg, var(--ink) 0%, var(--ink-soft) 56%, oklch(0.11 0.018 248) 100%) !important;
+  color: oklch(0.98 0.004 90) !important;
+  box-shadow:
+    0 44px 120px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 color-mix(in oklch, white 10%, transparent) !important;
+}
+
+.dashboard-device .bg-muted\/70 {
+  background: color-mix(in oklch, white 6%, transparent) !important;
+}
+
+.dashboard-device .text-muted-foreground {
+  color: color-mix(in oklch, white 56%, transparent) !important;
+}
+
+.dashboard-device .text-foreground,
+.dashboard-device .font-medium,
+.dashboard-device .font-semibold {
+  color: oklch(0.98 0.004 90);
+}
+
+.dashboard-orbit-card {
+  border-color: color-mix(in oklch, white 12%, transparent) !important;
+  background: color-mix(in oklch, var(--ink-card) 78%, transparent) !important;
+  color: oklch(0.98 0.004 90) !important;
+}
+
+.dashboard-orbit-card p,
+.dashboard-orbit-card span {
+  color: color-mix(in oklch, white 54%, transparent) !important;
+}
+
+.dashboard-screen-stage {
+  border-color: color-mix(in oklch, white 10%, transparent) !important;
+  background:
+    linear-gradient(to right, color-mix(in oklch, white 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, white 5%, transparent) 1px, transparent 1px),
+    radial-gradient(circle at 20% 18%, color-mix(in oklch, var(--primary) 19%, transparent), transparent 20rem),
+    radial-gradient(circle at 82% 72%, color-mix(in oklch, var(--gold) 12%, transparent), transparent 18rem),
+    oklch(0.145 0.021 248) !important;
+  background-size: 58px 58px;
+}
+
+.dashboard-signal-cloud span {
+  border-color: color-mix(in oklch, white 12%, var(--primary)) !important;
+  background: color-mix(in oklch, var(--ink-card) 72%, transparent) !important;
+  color: color-mix(in oklch, white 70%, var(--primary)) !important;
+}
+
+.dashboard-view .bg-background {
+  border-color: color-mix(in oklch, white 10%, transparent) !important;
+  background: color-mix(in oklch, var(--ink-card) 76%, transparent) !important;
+  color: oklch(0.98 0.004 90) !important;
+}
+
+.dashboard-view .bg-primary\/10 {
+  background: color-mix(in oklch, var(--primary) 18%, transparent) !important;
+}
+
+.dashboard-view .text-primary {
+  color: color-mix(in oklch, white 62%, var(--primary)) !important;
+}
+
+.dashboard-chip {
+  background: color-mix(in oklch, var(--ink-card) 70%, transparent) !important;
+}
+
 @keyframes dashboard-signal-drift {
   0%, 100% {
     transform: translate3d(0, 0, 0);
@@ -955,5 +1097,494 @@ html {
 @media (max-width: 1023px) {
   .hero-telemetry {
     display: none;
+  }
+}
+
+/* LifeCare Performance planning implementation */
+.lcp-hero {
+  background:
+    radial-gradient(circle at 74% 18%, rgba(0, 180, 216, 0.18), transparent 28rem),
+    radial-gradient(circle at 18% 38%, rgba(201, 168, 76, 0.12), transparent 24rem),
+    #0A0D1A;
+}
+
+.lcp-grid-bg,
+.lcp-grid-section::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, rgba(0, 180, 216, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 180, 216, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at 62% 20%, black, transparent 72%);
+}
+
+.lcp-grid-section {
+  position: relative;
+  overflow: hidden;
+  background: #0A0D1A;
+}
+
+.lcp-grid-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.lcp-cta {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 0.375rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.lcp-cta:hover {
+  transform: translateY(-2px);
+}
+
+.lcp-cta-gold {
+  border: 1px solid rgba(201, 168, 76, 0.8);
+  background: rgba(201, 168, 76, 0.12);
+  color: #C9A84C;
+}
+
+.lcp-cta-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.lcp-dashboard {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(145deg, rgba(13, 27, 42, 0.94), rgba(5, 8, 16, 0.96)),
+    radial-gradient(circle at 60% 20%, rgba(0, 180, 216, 0.16), transparent 22rem);
+  padding: 1rem;
+  box-shadow: 0 34px 120px rgba(0, 0, 0, 0.42);
+}
+
+.lcp-dashboard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(0, 180, 216, 0.12), transparent);
+  animation: lcp-scan 5.8s ease-in-out infinite;
+}
+
+.lcp-dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1rem;
+}
+
+.lcp-dashboard-header span,
+.lcp-metric span,
+.lcp-alert-card span,
+.lcp-alert-stat span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.lcp-dashboard-header strong {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+
+.lcp-pulse-icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(204, 34, 0, 0.16);
+  color: #CC2200;
+  box-shadow: 0 0 0 0 rgba(204, 34, 0, 0.32);
+  animation: lcp-pulse 2.2s ease-in-out infinite;
+}
+
+.lcp-avatar-panel,
+.lcp-scan-card,
+.lcp-visbody {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  background: #050810;
+  aspect-ratio: 16 / 9;
+}
+
+.lcp-avatar-panel img,
+.lcp-scan-card img,
+.lcp-visbody img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lcp-avatar-panel {
+  max-height: 430px;
+}
+
+.lcp-avatar-panel img {
+  margin: -2.5rem auto -4rem;
+  max-width: 410px;
+}
+
+.lcp-alert-card,
+.lcp-metric,
+.lcp-alert-stat {
+  border-radius: 0.375rem;
+  border: 1px solid rgba(204, 34, 0, 0.46);
+  background: rgba(204, 34, 0, 0.08);
+  padding: 1rem;
+}
+
+.lcp-alert-card strong {
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lcp-alert-card b,
+.lcp-alert-stat strong {
+  color: #CC2200;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.lcp-metric {
+  border-color: rgba(0, 180, 216, 0.34);
+  background: rgba(0, 180, 216, 0.07);
+}
+
+.lcp-metric strong {
+  display: block;
+  margin-top: 0.4rem;
+  color: #00B4D8;
+  font-size: 1.1rem;
+}
+
+.lcp-alert-stat strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 2rem;
+}
+
+.lcp-ecg {
+  position: absolute;
+  inset: 12% -10%;
+  opacity: 0.12;
+  background:
+    linear-gradient(100deg, transparent 0 10%, #fff 10.4% 10.8%, transparent 11% 23%, #fff 23.4% 23.9%, transparent 24% 42%, #fff 42.4% 43.2%, transparent 43.4% 100%);
+  filter: blur(2px);
+  transform: skewY(-8deg);
+}
+
+.lcp-system-card,
+.lcp-data-card,
+.lcp-step-card,
+.lcp-engine-card,
+.lcp-case-card {
+  border-width: 1px;
+  border-radius: 0.5rem;
+  background: rgba(10, 13, 26, 0.72);
+  padding: 1.5rem;
+}
+
+.lcp-system-card h3,
+.lcp-data-card h3,
+.lcp-step-card h3,
+.lcp-engine-card h3,
+.lcp-case-card h3 {
+  margin-top: 1rem;
+  font-size: 1.55rem;
+  font-weight: 900;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+.lcp-system-card p,
+.lcp-data-card p,
+.lcp-step-card p,
+.lcp-engine-card p {
+  margin-top: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.lcp-system-card em {
+  display: block;
+  margin-top: 1.25rem;
+  color: #C9A84C;
+  font-weight: 700;
+}
+
+.lcp-visbody {
+  border-radius: 0;
+}
+
+.lcp-visbody img {
+  object-position: center center;
+}
+
+.lcp-data-card {
+  border-color: rgba(0, 180, 216, 0.34);
+  background: #0D1B2A;
+}
+
+.lcp-data-card span {
+  display: inline-flex;
+  margin-top: 1rem;
+  border-radius: 999px;
+  background: rgba(201, 168, 76, 0.14);
+  padding: 0.35rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+
+.lcp-step-card {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.lcp-step-card > span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: #C9A84C;
+}
+
+.lcp-gauge {
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  border: 1px solid rgba(0, 180, 216, 0.24);
+  border-radius: 0.5rem;
+  background: rgba(13, 27, 42, 0.82);
+  padding: 1.1rem;
+}
+
+.lcp-gauge-ring {
+  display: grid;
+  width: 7rem;
+  height: 7rem;
+  place-items: center;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, #0A0D1A 0 58%, transparent 59%),
+    conic-gradient(#00B4D8 var(--value), rgba(255, 255, 255, 0.1) 0);
+  box-shadow: 0 0 34px rgba(0, 180, 216, 0.18);
+}
+
+.lcp-gauge-ring span {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #00B4D8;
+}
+
+.lcp-gauge p {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.lcp-engine-card {
+  border-color: rgba(0, 180, 216, 0.34);
+  background: #0D1B2A;
+}
+
+.lcp-case-card {
+  display: grid;
+  gap: 1.4rem;
+  background: #0D1B2A;
+}
+
+.lcp-case-card > div > span {
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.lcp-case-quote {
+  border-left: 3px solid #C9A84C;
+  padding-left: 1rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.lcp-proof-image {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 180, 216, 0.24);
+  background: #050810;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+}
+
+.lcp-proof-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.lcp-insight-card,
+.lcp-result-tile,
+.lcp-timeline-tile,
+.lcp-protocol-card {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 1rem;
+}
+
+.lcp-insight-card strong,
+.lcp-timeline-tile strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+
+.lcp-insight-card p,
+.lcp-timeline-tile p,
+.lcp-protocol-card p {
+  margin-top: 0.6rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.lcp-result-tile {
+  border-color: rgba(201, 168, 76, 0.24);
+  background: rgba(201, 168, 76, 0.07);
+}
+
+.lcp-result-tile strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 950;
+  line-height: 1;
+  color: #C9A84C;
+}
+
+.lcp-result-tile span {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.lcp-timeline-tile {
+  border-color: rgba(0, 180, 216, 0.26);
+  background: rgba(0, 180, 216, 0.055);
+}
+
+.lcp-protocol-card {
+  border-color: rgba(0, 180, 216, 0.24);
+  background: rgba(10, 13, 26, 0.54);
+}
+
+.lcp-protocol-card h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+@keyframes lcp-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(204, 34, 0, 0.34);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(204, 34, 0, 0);
+  }
+}
+
+@keyframes lcp-scan {
+  0% {
+    transform: translateX(-110%);
+    opacity: 0;
+  }
+  35%, 65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .lcp-avatar-panel {
+    max-height: 360px;
+  }
+
+  .lcp-avatar-panel img {
+    margin-bottom: -3rem;
+  }
+
+  .lcp-system-card,
+  .lcp-data-card,
+  .lcp-step-card,
+  .lcp-engine-card,
+  .lcp-case-card {
+    padding: 1.1rem;
+  }
+
+  .lcp-case-card .grid-cols-4 {
+    grid-template-columns: 1.1fr 0.8fr 0.8fr 0.9fr;
+    font-size: 0.72rem;
   }
 }

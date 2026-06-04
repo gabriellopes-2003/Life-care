@@ -1,1103 +1,694 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Image from "next/image"
+import type { CSSProperties } from "react"
+import type { LucideIcon } from "lucide-react"
 import {
   Activity,
+  AlertTriangle,
   ArrowRight,
-  BarChart3,
+  Brain,
   CheckCircle2,
-  Clock,
-  Dna,
-  FlaskConical,
   HeartPulse,
-  LineChart,
-  Mail,
-  MapPin,
-  Phone,
-  ShieldCheck,
-  Sparkles,
+  Lock,
+  Microscope,
+  ScanLine,
   Stethoscope,
-  Target,
   TrendingUp,
-  Users,
   Watch,
   Zap,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { HeroOrb3D } from "@/components/hero-orb-3d"
 
-function Reveal({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: ReactNode
-  className?: string
-  delay?: number
-}) {
-  return (
-    <div className={`lifecare-reveal ${className}`} style={{ animationDelay: `${delay}s` }}>
-      {children}
-    </div>
-  )
+const navItems = [
+  ["Início", "#inicio"],
+  ["O Ecossistema", "#ecossistema"],
+  ["Como Funciona", "#gps"],
+  ["Tecnologia", "#tecnologia"],
+  ["LMIS", "#lmis"],
+  ["Casos Clínicos", "#casos"],
+  ["Programa", "#programa"],
+  ["Dr. Muriel", "#contato"],
+]
+
+const alerts = [
+  ["Inflamação", "Elevada"],
+  ["Estresse oxidativo", "Elevado"],
+  ["HRV", "Baixo"],
+  ["Qualidade do sono", "Baixa"],
+  ["Metabolismo", "Diminuído"],
+]
+
+const dataBlocks: Array<[LucideIcon, string, string, string?]> = [
+  [
+    Activity,
+    "Bioimpedância",
+    "Composição corporal precisa: gordura visceral, massa muscular, água intracelular, água extracelular e ângulo de fase.",
+  ],
+  [
+    Zap,
+    "Calorimetria indireta",
+    "Taxa metabólica basal medida diretamente, não estimada. Menos erro na prescrição nutricional.",
+  ],
+  [
+    ScanLine,
+    "Visbody M30",
+    "Scanner corporal 3D com IA, avatar 360, circunferências, postura, simetria e composição segmentar.",
+    "VISBODY 3D",
+  ],
+  [
+    Watch,
+    "LifeCare Ring",
+    "Dados contínuos de sono, variabilidade cardíaca, frequência cardíaca, recuperação e atividade diária.",
+    "HRV · SONO · RECUPERAÇÃO",
+  ],
+  [
+    Microscope,
+    "Exames laboratoriais",
+    "Painel completo de biomarcadores: hormônios, inflamação, metabolismo glicídico, lipídico e micronutrientes.",
+  ],
+  [
+    Brain,
+    "Comportamento",
+    "Mapeamento de padrões alimentares, sedentarismo, estresse, rotina e adesão ao plano terapêutico.",
+  ],
+]
+
+const gpsSteps: Array<[string, LucideIcon, string, string]> = [
+  [
+    "01",
+    ScanLine,
+    "Coleta de dados",
+    "Wearable, Visbody 3D, bioimpedância, calorimetria, exames laboratoriais, histórico clínico e dados comportamentais.",
+  ],
+  [
+    "02",
+    Brain,
+    "Processamento LMIS",
+    "11 blocos de avaliação integrada, dashboards, scores objetivos, fenótipos metabólicos e clusters em uma visão unificada.",
+  ],
+  [
+    "03",
+    Stethoscope,
+    "Decisão clínica",
+    "Trajectory Engine, Cardiovascular Engine e Decision Engine priorizam o maior impacto com menor risco.",
+  ],
+  [
+    "04",
+    TrendingUp,
+    "Ajuste contínuo",
+    "Recalibração dinâmica a cada novo dado coletado. O sistema fica mais preciso com o tempo.",
+  ],
+]
+
+const scores = [
+  ["BCS", "Body Composition", 76],
+  ["LMS", "Metabolic", 63],
+  ["LBS", "Bioenergetic", 71],
+  ["LAS", "Autonomic", 58],
+  ["LCIS", "Cardiometabolic", 49],
+  ["LHS", "Hormonal", 66],
+  ["NGS", "Global", 69],
+]
+
+const fhfMetrics = [
+  ["Peso corporal", "125,1 kg", "92,0 kg", "-33,1 kg"],
+  ["IMC", "39,4", "29,0", "-10,4"],
+  ["Gordura corporal", "37,0%", "26,3%", "-10,7 pp"],
+  ["Massa gorda", "46,3 kg", "24,2 kg", "-22,1 kg"],
+  ["Circ. abdominal", "122 cm", "93,5 cm", "-28,5 cm"],
+]
+
+const dcMetrics = [
+  ["Peso", "85 kg", "71,8 kg", "-13,2 kg"],
+  ["Gordura corporal", "36,6%", "26,0%", "-10,6 pp"],
+  ["Massa gorda", "31,1 kg", "18,7 kg", "-12,4 kg"],
+  ["IMC", "29,4", "24,8", "Eutrofia"],
+  ["Relação músculo/gordura", "0,8", "1,4", "Quase dobrou"],
+]
+
+const protocolPillars = [
+  ["Nutrição estratégica", "Protocolo alimentar individualizado e periodizado conforme fase metabólica e resposta biológica."],
+  ["Preservação muscular", "Estratégias ativas para proteger tecido nobre durante déficit calórico prolongado."],
+  ["Treino estruturado", "Exercício adaptado ao fenótipo e à capacidade funcional em cada etapa da jornada."],
+  ["Inteligência metabólica", "Leitura contínua de marcadores funcionais para orientar ajustes clínicos com precisão."],
+  ["Monitoramento contínuo", "Rastreabilidade longitudinal com reavaliações periódicas e decisões baseadas em evidências."],
+  ["Ajustes por dados", "Cada decisão sustentada por biomarcadores objetivos, não por percepção subjetiva."],
+]
+
+function SectionLabel({ children }: { children: string }) {
+  return <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#C9A84C]">{children}</p>
 }
 
-function MetricCard({
-  label,
-  value,
-  detail,
-  icon,
-  delay = 0,
-}: {
-  label: string
-  value: string
-  detail: string
-  icon: ReactNode
-  delay?: number
-}) {
+function Gauge({ label, value }: { label: string; value: number }) {
   return (
-    <div
-      className="gsap-card gsap-hover lifecare-motion-card rounded-lg border border-border bg-card p-5 shadow-[0_18px_50px_rgba(27,43,67,0.06)]"
-      style={{ animationDelay: `${delay}s` }}
-    >
-      <div className="mb-5 flex items-center justify-between">
-        <div className="lifecare-icon-pulse grid size-10 place-items-center rounded-md bg-primary/10 text-primary">
-          {icon}
-        </div>
-        <span className="lifecare-live-dot font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          ao vivo
-        </span>
+    <div className="lcp-gauge">
+      <div className="lcp-gauge-ring" style={{ "--value": `${value * 3.6}deg` } as CSSProperties}>
+        <span>{value}</span>
       </div>
-      <p className="text-sm text-muted-foreground">{label}</p>
-      <p className="mt-2 text-3xl font-semibold tracking-tight text-foreground">{value}</p>
-      <p className="mt-3 text-sm leading-6 text-muted-foreground">{detail}</p>
+      <p>{label}</p>
     </div>
   )
 }
 
-function AnimatedLine({ tone = "primary" }: { tone?: "primary" | "cyan" | "gold" }) {
-  const strokeClass =
-    tone === "gold" ? "stroke-accent" : tone === "cyan" ? "stroke-cyan" : "stroke-primary"
-
+function HeroDashboard() {
   return (
-    <svg viewBox="0 0 260 86" className="lifecare-chart h-full w-full overflow-visible">
-      <path
-        d="M 4 74 C 38 68, 41 46, 74 50 S 122 76, 151 45 S 202 18, 256 12"
-        className="stroke-border"
-        strokeWidth="2"
-        fill="none"
-        strokeLinecap="round"
-      />
-      <motion.path
-        d="M 4 74 C 38 68, 41 46, 74 50 S 122 76, 151 45 S 202 18, 256 12"
-        className={`${strokeClass} lifecare-chart-line`}
-        strokeWidth="3"
-        fill="none"
-        strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.8, ease: "easeOut" }}
-      />
-      {[74, 151, 256].map((x, index) => (
-        <motion.circle
-          key={x}
-          cx={x}
-          cy={index === 0 ? 50 : index === 1 ? 45 : 12}
-          r="4"
-          className="lifecare-chart-dot fill-background stroke-primary"
-          strokeWidth="2"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 1 + index * 0.15, duration: 0.35 }}
-        />
-      ))}
-    </svg>
-  )
-}
-
-function ProgressRing({ value, label }: { value: number; label: string }) {
-  const circumference = 2 * Math.PI * 34
-
-  return (
-    <div className="flex items-center gap-4">
-      <svg width="82" height="82" viewBox="0 0 82 82" className="lifecare-ring -rotate-90">
-        <circle cx="41" cy="41" r="34" fill="none" stroke="currentColor" strokeWidth="7" className="text-muted" />
-        <motion.circle
-          cx="41"
-          cy="41"
-          r="34"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="7"
-          strokeLinecap="round"
-          className="text-primary"
-          strokeDasharray={circumference}
-          initial={{ strokeDashoffset: circumference }}
-          whileInView={{ strokeDashoffset: circumference - (value / 100) * circumference }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.4, ease: "easeOut" }}
-        />
-      </svg>
-      <div>
-        <p className="text-2xl font-semibold">{value}%</p>
-        <p className="text-sm text-muted-foreground">{label}</p>
+    <div className="lcp-dashboard">
+      <div className="lcp-dashboard-header">
+        <div>
+          <span>DASHBOARD LIFECARE</span>
+          <strong>Status biológico</strong>
+        </div>
+        <div className="lcp-pulse-icon">
+          <HeartPulse className="size-6" />
+        </div>
       </div>
-    </div>
-  )
-}
 
-function DashboardPreview() {
-  const biomarkers = [
-    ["VO2", "alta", "text-cyan"],
-    ["HRV", "estavel", "text-primary"],
-    ["Glicose", "atenção", "text-accent"],
-    ["Sono", "recuperando", "text-cyan"],
-  ]
+      <div className="lcp-avatar-panel">
+        <Image
+          src="/body-dashboard.png"
+          alt="Avatar biológico digital com painéis de métricas LifeCare"
+          width={360}
+          height={520}
+          priority
+        />
+      </div>
 
-  return (
-    <div className="lifecare-reveal relative" style={{ animationDelay: ".18s" }}>
-      <div className="lifecare-side-scan absolute -left-6 top-12 hidden h-48 w-px bg-gradient-to-b from-transparent via-primary/40 to-transparent lg:block" />
-      <div className="lifecare-dashboard hero-dashboard-loop relative overflow-hidden rounded-lg border border-border bg-card p-4 shadow-[0_30px_80px_rgba(27,43,67,0.10)]">
-        <div className="lifecare-scanline" aria-hidden="true" />
-        <div className="mb-4 flex items-center justify-between rounded-md bg-muted/60 px-4 py-3">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              LifeCare OS
-            </p>
-            <p className="mt-1 font-medium">Painel de performance clínica</p>
-          </div>
-          <motion.div
-            animate={{ scale: [1, 1.08, 1] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            className="lifecare-heart grid size-11 place-items-center rounded-full bg-primary text-primary-foreground"
-          >
-            <HeartPulse className="size-5" />
-          </motion.div>
+      <div className="lcp-alert-card">
+        <div className="flex items-center gap-3">
+          <AlertTriangle className="size-5 text-[#CC2200]" />
+          <strong>Alertas precoces</strong>
         </div>
-
-        <div className="grid gap-4 md:grid-cols-[1.2fr_.8fr]">
-          <div className="lifecare-motion-card rounded-md border border-border bg-background p-5">
-            <div className="mb-6 flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Risco metabólico</p>
-                <p className="mt-1 text-3xl font-semibold tracking-tight">-24%</p>
-              </div>
-              <span className="rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
-                90 dias
-              </span>
-            </div>
-            <div className="h-28">
-              <AnimatedLine />
-            </div>
-          </div>
-
-          <div className="grid gap-4">
-            <div className="lifecare-motion-card rounded-md border border-border bg-background p-5">
-              <ProgressRing value={84} label="adesão ao plano" />
-            </div>
-            <div className="lifecare-motion-card rounded-md border border-border bg-background p-5">
-              <p className="text-sm text-muted-foreground">Próxima ação</p>
-              <p className="mt-2 font-medium leading-6">
-                Ajustar treino de força e revisar janela alimentar.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-4 grid gap-3 md:grid-cols-4">
-          {biomarkers.map(([name, status, color], index) => (
-            <div
-              key={name}
-              className="lifecare-data-chip rounded-md border border-border bg-background p-4"
-              style={{ animationDelay: `${0.35 + index * 0.06}s` }}
-            >
-              <p className="text-xs text-muted-foreground">{name}</p>
-              <p className={`mt-2 text-sm font-medium ${color}`}>{status}</p>
+        <div className="mt-4 grid gap-2">
+          {alerts.map(([label, status]) => (
+            <div key={label} className="flex items-center justify-between gap-3 border-t border-white/10 pt-2">
+              <span>{label}</span>
+              <b>{status}</b>
             </div>
           ))}
         </div>
       </div>
-    </div>
-  )
-}
 
-function DataRibbon() {
-  const items = useMemo(
-    () => ["Bioimpedancia", "VO2", "HRV", "Glicose", "Sono", "Forca", "Risco", "Nutrição", "Metabolismo", "Check-up"],
-    []
-  )
-
-  return (
-    <div className="lifecare-clip-stage overflow-hidden border-y border-border bg-background py-4">
-      <motion.div
-        className="flex w-max gap-4"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-      >
-        {[...items, ...items, ...items].map((item, index) => (
-          <span
-            key={`${item}-${index}`}
-            className="lifecare-ribbon-chip rounded-full border border-border bg-card px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground"
-          >
-            {item}
-          </span>
+      <div className="grid gap-3 sm:grid-cols-3">
+        {[
+          ["HRV", "42 ms"],
+          ["Inflamação", "7.8 mg/L"],
+          ["Metabolismo", "-18% vs. ideal"],
+        ].map(([label, value]) => (
+          <div key={label} className="lcp-metric">
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   )
 }
 
-function HeroTelemetry() {
-  const items = [
-    ["VO2", "+12%", "capacidade"],
-    ["HRV", "84", "recuperacao"],
-    ["Sono", "7h42", "janela ideal"],
-    ["Risco", "-24%", "metabolico"],
-  ]
-
+function CaseTable({ rows }: { rows: string[][] }) {
   return (
-    <div className="hero-telemetry" aria-hidden="true">
-      {items.map(([label, value, detail], index) => (
-        <div key={label} className="hero-telemetry-chip" style={{ animationDelay: `${index * 0.45}s` }}>
-          <span>{label}</span>
-          <strong>{value}</strong>
-          <small>{detail}</small>
+    <div className="overflow-hidden rounded-lg border border-white/10">
+      <div className="grid grid-cols-4 bg-white/5 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-white/50">
+        <span>Métrica</span>
+        <span>Antes</span>
+        <span>Depois</span>
+        <span>Variação</span>
+      </div>
+      {rows.map((row) => (
+        <div key={row[0]} className="grid grid-cols-4 gap-2 border-t border-white/10 px-4 py-3 text-sm text-white/76">
+          <span className="font-medium text-white">{row[0]}</span>
+          <span>{row[1]}</span>
+          <span>{row[2]}</span>
+          <span className="font-semibold text-[#C9A84C]">{row[3]}</span>
         </div>
       ))}
     </div>
   )
 }
 
-function DashboardScrollExperience() {
-  const steps = [
-    {
-      eyebrow: "01 / coleta",
-      title: "Dados entram no sistema",
-      text: "Avaliação, exames, bioimpedância e sinais de rotina chegam ao mesmo painel.",
-      metric: "18 fontes",
-      status: "sincronizadas",
-    },
-    {
-      eyebrow: "02 / leitura",
-      title: "O risco fica visível",
-      text: "Biomarcadores e recuperação são cruzados para separar prioridade clínica de ruído.",
-      metric: "-24%",
-      status: "risco metabólico",
-    },
-    {
-      eyebrow: "03 / plano",
-      title: "A ação aparece clara",
-      text: "A equipe recebe o próximo ajuste prático para treino, nutrição e acompanhamento.",
-      metric: "91%",
-      status: "clareza de plano",
-    },
-    {
-      eyebrow: "04 / evolução",
-      title: "O valor vira recorrência",
-      text: "O aluno acompanha progresso fisiológico e entende por que continuar no plano.",
-      metric: "+32%",
-      status: "adesão projetada",
-    },
-  ]
-  const signalLabels = ["VO2 max", "HRV", "Sono", "Glicose", "Forca", "Risco"]
-
+export default function HomePage() {
   return (
-    <section id="dashboard" className="dashboard-scroll-story dashboard-static-story relative border-y border-border bg-foreground py-24 text-background md:py-32">
-      <div className="dashboard-depth-grid absolute inset-0" aria-hidden="true" />
-      <div className="dashboard-scroll-pin flex items-center">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
-          <div className="max-w-xl">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-background/50">dashboard vivo</p>
-            <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
-              O dashboard mostra a jornada do aluno em uma visão clara.
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-background/62">
-              Uma seção direta para o visitante entender como o produto processa dados,
-              revela risco, sugere ação e mostra evolução.
-            </p>
-
-            <div className="mt-10 grid gap-3">
-              {steps.map((step, index) => (
-                <div
-                  key={step.eyebrow}
-                  className="dashboard-story-step rounded-lg border border-background/10 bg-background/[0.035] p-4 transition-colors"
-                  data-step={index}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">{step.eyebrow}</p>
-                      <h3 className="mt-2 text-xl font-semibold tracking-tight">{step.title}</h3>
-                    </div>
-                    <span className="dashboard-step-dot mt-1 size-2 rounded-full bg-primary" />
-                  </div>
-                  <p className="mt-3 leading-7 text-background/58">{step.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="dashboard-stage relative">
-            <div className="dashboard-orbit-card dashboard-orbit-card-a">
-              <p>risco</p>
-              <strong>-24%</strong>
-              <span>queda projetada</span>
-            </div>
-            <div className="dashboard-orbit-card dashboard-orbit-card-b">
-              <p>adesao</p>
-              <strong>91%</strong>
-              <span>plano claro</span>
-            </div>
-            <div className="dashboard-orbit-card dashboard-orbit-card-c">
-              <p>alertas</p>
-              <strong>7</strong>
-              <span>prioridades ativas</span>
-            </div>
-
-            <div className="dashboard-device relative overflow-hidden rounded-lg border border-background/12 bg-background p-4 text-foreground shadow-[0_36px_110px_rgba(0,0,0,0.32)]">
-            <div className="lifecare-scanline" aria-hidden="true" />
-            <div className="mb-4 flex items-center justify-between rounded-md bg-muted/70 px-4 py-3">
-              <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">LifeCare OS</p>
-                <p className="mt-1 font-medium">Performance médica em tempo real</p>
-              </div>
-              <div className="lifecare-heart grid size-11 place-items-center rounded-full bg-primary text-primary-foreground">
-                <HeartPulse className="size-5" />
-              </div>
-            </div>
-
-            <div className="dashboard-screen-stage relative min-h-[560px] overflow-hidden rounded-md border border-border bg-card">
-              <div className="dashboard-screen-glow" aria-hidden="true" />
-              <div className="dashboard-signal-cloud" aria-hidden="true">
-                {signalLabels.map((label, index) => (
-                  <span key={label} style={{ animationDelay: `${index * 0.28}s` }}>
-                    {label}
-                  </span>
-                ))}
-              </div>
-              {steps.map((step, index) => (
-                <div
-                  key={step.title}
-                  className="dashboard-view absolute inset-0 grid content-between p-5"
-                  data-view={index}
-                >
-                  <div className="dashboard-view-inner grid gap-4 md:grid-cols-[1.1fr_.9fr]">
-                    <div className="rounded-md border border-border bg-background p-5">
-                      <div className="mb-5 flex items-start justify-between">
-                        <div>
-                          <p className="text-sm text-muted-foreground">{step.title}</p>
-                          <p className="mt-2 text-4xl font-semibold tracking-tight">{step.metric}</p>
-                        </div>
-                        <span className="shrink-0 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">{step.status}</span>
-                      </div>
-                      <div className="dashboard-chart-wrap h-44">
-                        <AnimatedLine tone={index % 2 === 0 ? "primary" : "cyan"} />
-                      </div>
-                    </div>
-
-                    <div className="grid gap-4">
-                      <div className="dashboard-micro-card rounded-md border border-border bg-background p-5">
-                        <ProgressRing value={[68, 76, 91, 84][index]} label={["dados úteis", "risco lido", "plano claro", "adesão"][index]} />
-                      </div>
-                      <div className="dashboard-micro-card rounded-md border border-border bg-background p-5">
-                        <p className="text-sm text-muted-foreground">Próxima ação</p>
-                        <p className="mt-2 font-medium leading-6">
-                          {[
-                            "Validar exames e completar perfil metabólico.",
-                            "Priorizar alerta cardiometabólico e recuperação.",
-                            "Ajustar treino de força e janela alimentar.",
-                            "Enviar relatório de progresso para o aluno.",
-                          ][index]}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 grid gap-3 md:grid-cols-4">
-                    {["VO2", "HRV", "Glicose", "Sono"].map((item, chipIndex) => (
-                      <div key={item} className="dashboard-chip lifecare-data-chip rounded-md border border-border bg-background p-4">
-                        <p className="text-xs text-muted-foreground">{item}</p>
-                        <p className="mt-2 text-sm font-medium text-primary">
-                          {[
-                            ["novo", "coletado", "pendente", "ativo"],
-                            ["alto", "estável", "atenção", "recuperando"],
-                            ["ajustar", "bom", "prioridade", "monitorar"],
-                            ["evoluiu", "consistente", "melhorando", "retenção"],
-                          ][index][chipIndex]}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            </div>
+    <main className="min-h-screen bg-[#0A0D1A] text-white">
+      <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0A0D1A]/82 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5">
+          <a href="#inicio" className="flex items-center gap-3">
+            <span className="grid size-10 place-items-center rounded-md border border-[#C9A84C]/40 bg-[#C9A84C]/10 text-[#C9A84C]">
+              <HeartPulse className="size-5" />
+            </span>
+            <span className="leading-tight">
+              <strong className="block text-sm font-black uppercase tracking-[0.16em]">LifeCare</strong>
+              <small className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C9A84C]">
+                Medical Performance
+              </small>
+            </span>
+          </a>
+          <div className="hidden items-center gap-5 lg:flex">
+            {navItems.map(([label, href]) => (
+              <a key={href} href={href} className="text-xs font-bold uppercase tracking-[0.14em] text-white/58 transition hover:text-[#C9A84C]">
+                {label}
+              </a>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </nav>
 
-function ProductTimeline() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 72%", "end 35%"],
-  })
-  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+      <section id="inicio" className="lcp-hero relative overflow-hidden px-5 pt-32">
+        <div className="lcp-grid-bg" aria-hidden="true" />
+        <div className="mx-auto grid min-h-[calc(100vh-8rem)] max-w-7xl items-center gap-12 pb-16 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="relative z-10">
+            <SectionLabel>Medicina preventiva baseada em dados reais</SectionLabel>
+            <h1 className="mt-6 max-w-3xl text-5xl font-black uppercase leading-[0.95] tracking-normal text-white md:text-7xl xl:text-8xl">
+              A verdade que seu médico <span className="text-[#C9A84C]">nunca te contou</span>
+            </h1>
+            <p className="mt-7 max-w-2xl text-xl font-semibold leading-8 text-white/82">
+              Exame normal. Corpo adoecendo em silêncio. Seu corpo pode estar mandando sinais que nenhum exame rotineiro é capaz de detectar.
+            </p>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <a href="#programa" className="lcp-cta lcp-cta-gold">
+                Conheça o Programa <ArrowRight className="size-4" />
+              </a>
+              <a href="#casos" className="lcp-cta lcp-cta-ghost">
+                Ver Casos Clínicos
+              </a>
+            </div>
+            <div className="mt-10 inline-flex items-center gap-3 rounded-md border border-[#C9A84C]/35 bg-[#C9A84C]/8 px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-[#C9A84C]">
+              <Lock className="size-4" />
+              Medicina preventiva baseada em dados reais
+            </div>
+          </div>
+          <HeroDashboard />
+        </div>
+        <p className="relative z-10 mx-auto pb-8 text-center font-mono text-xs font-semibold uppercase tracking-[0.24em] text-white/50">
+          LifeCare · Human Performance System
+        </p>
+      </section>
 
-  const steps = [
-    {
-      number: "01",
-      title: "Coleta inteligente",
-      text: "A academia reúne avaliação física, exames, bioimpedância, dados de treino e sinais de rotina em um único fluxo.",
-      icon: <FlaskConical className="size-5" />,
-      result: "Base clínica organizada",
-    },
-    {
-      number: "02",
-      title: "Leitura médica",
-      text: "O LifeCare cruza biomarcadores, recuperação, risco metabólico e evolução para separar ruído de prioridade.",
-      icon: <Stethoscope className="size-5" />,
-      result: "Riscos e oportunidades claros",
-    },
-    {
-      number: "03",
-      title: "Plano de performance",
-      text: "A equipe recebe ações práticas para treino, nutrição, acompanhamento e próximos pontos de checagem.",
-      icon: <Target className="size-5" />,
-      result: "Conduta personalizada",
-    },
-    {
-      number: "04",
-      title: "Evolução contínua",
-      text: "O sistema acompanha resposta, adesão e necessidade de ajuste, criando percepção de valor mês após mês.",
-      icon: <TrendingUp className="size-5" />,
-      result: "Retenção e resultado",
-    },
-  ]
-
-  return (
-    <section id="processo" className="bg-foreground py-24 text-background md:py-32">
-      <div className="mx-auto max-w-7xl px-5">
-        <Reveal className="gsap-reveal max-w-3xl">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-background/60">linha do tempo</p>
-          <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-            O produto aparece como uma jornada, não como uma lista de recursos.
+      <section className="relative overflow-hidden border-y border-white/10 bg-black px-5 py-24 md:py-32">
+        <div className="lcp-ecg" aria-hidden="true" />
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-4xl font-black uppercase leading-none tracking-normal text-[#C9A84C] md:text-6xl">
+            O problema começa anos antes do diagnóstico
           </h2>
-          <p className="mt-6 text-lg leading-8 text-background/65">
-            Conforme o visitante desce a página, cada etapa revela como dados soltos viram decisão médica,
-            plano de ação e acompanhamento recorrente.
+          <div className="mt-14">
+            {["Queda metabólica", "Inflamação", "Resistência insulínica", "Doença clínica"].map((item, index) => (
+              <div key={item} className="flex items-center gap-5 border-t border-white/18 py-6 last:border-b">
+                <span className={`size-3 rounded-full ${index === 3 ? "bg-[#CC2200]" : "bg-[#C9A84C]"}`} />
+                <p className={`text-2xl font-black uppercase tracking-normal ${index === 3 ? "text-[#CC2200]" : "text-white"}`}>
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-12 text-2xl font-black uppercase leading-9 text-white md:text-3xl">
+            O corpo não falha de repente. Existe uma rota invisível que precede qualquer sintoma.
           </p>
-        </Reveal>
+        </div>
+      </section>
 
-        <div ref={ref} className="relative mt-16">
-          <div className="absolute left-5 top-0 hidden h-full w-px bg-background/15 md:block" />
-          <motion.div
-            style={{ scaleY: lineScale, transformOrigin: "top" }}
-            className="absolute left-5 top-0 hidden h-full w-px bg-primary md:block"
-          />
+      <section id="tecnologia" className="relative overflow-hidden px-5 py-24 md:py-32">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="lcp-scan-card">
+            <Image
+              src="/lifecare-assets/metabolic-alert-scan.png"
+              alt="Scan biométrico metabólico com alertas clínicos em ciano e vermelho"
+              width={1792}
+              height={1024}
+            />
+          </div>
+          <div>
+            <SectionLabel>Alerta biométrico</SectionLabel>
+            <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+              Seu metabolismo está envelhecendo?
+            </h2>
+            <div className="mt-8 border-l-4 border-[#CC2200] bg-white/[0.04] p-6">
+              <p className="text-xl font-black uppercase leading-8 text-white">
+                Sem dados, você está apenas adivinhando. O estresse oxidativo e o colapso do sistema nervoso podem estar ocorrendo agora.
+              </p>
+            </div>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="lcp-alert-stat">
+                <span>Performance</span>
+                <strong>-24%</strong>
+              </div>
+              <div className="lcp-alert-stat">
+                <span>Estresse oxid.</span>
+                <strong>Crítico</strong>
+              </div>
+            </div>
+            <a href="#contato" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-[#C9A84C]">
+              Descubra seu status biológico <ArrowRight className="size-4" />
+            </a>
+          </div>
+        </div>
+      </section>
 
-          <div className="gsap-card-group grid gap-8">
-            {steps.map((step, index) => (
-              <article
-                key={step.number}
-                className="gsap-card lifecare-timeline-step relative grid gap-5 rounded-lg border border-background/12 bg-background/[0.03] p-6 md:ml-16 md:grid-cols-[.7fr_1.2fr_.65fr] md:p-8"
-                style={{ animationDelay: `${index * 0.08}s` }}
-              >
-                <div className="lifecare-timeline-node absolute -left-[59px] top-8 hidden size-10 place-items-center rounded-full border border-primary/50 bg-foreground text-primary shadow-[0_0_0_8px_var(--foreground)] md:grid">
-                  {step.icon}
-                </div>
+      <section id="ecossistema" className="bg-[#0D1B2A] px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <h2 className="text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+              LifeCare e LMIS: dois sistemas. Um ecossistema.
+            </h2>
+            <p className="mt-6 text-xl leading-8 text-white/68">
+              O LifeCare é o programa médico. O LMIS é o cérebro tecnológico. Juntos, formam o sistema operacional da sua saúde.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <article className="lcp-system-card border-[#00B4D8]/55">
+              <SectionLabel>LifeCare Medical Performance</SectionLabel>
+              <h3>O Programa Médico Premium</h3>
+              <p>
+                Um programa médico contínuo de inteligência metabólica, performance e longevidade. Não é clínica tradicional de consulta rápida, pacote anual de check-up, dieta ou treino genérico.
+              </p>
+              <p>
+                É um ecossistema estruturado, com avaliação clínica aprofundada, medições avançadas, monitoramento contínuo, plano personalizado e reavaliações estratégicas.
+              </p>
+              <em>O caminho do paciente: estruturado, contínuo e baseado em dados.</em>
+            </article>
+            <article className="lcp-system-card border-[#C9A84C]/70">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#00B4D8]">
+                LMIS · LifeCare Metabolic Intelligence System
+              </p>
+              <h3>O Cérebro Tecnológico</h3>
+              <p>
+                O LMIS organiza e interpreta wearable, Visbody 3D, exames laboratoriais, bioimpedância e histórico clínico em uma estrutura única, não em relatórios soltos.
+              </p>
+              <p>
+                Gera scores integrados, projeta trajetórias biológicas e apoia cada decisão médica com Trajectory Engine, Cardiovascular Engine e Decision Engine.
+              </p>
+              <em className="text-[#00B4D8]">A plataforma que transforma dados em decisões inteligentes.</em>
+            </article>
+          </div>
+          <p className="mt-12 text-center text-2xl font-semibold italic text-white">Saúde não é evento. É sistema.</p>
+        </div>
+      </section>
 
-                <div>
-                  <span className="font-mono text-xs text-background/45">{step.number}</span>
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">{step.title}</h3>
-                </div>
+      <section className="px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="lcp-visbody">
+            <Image
+              src="/lifecare-assets/digital-twin-visbody.png"
+              alt="Digital Twin corporal em scanner 3D com painéis de análise LifeCare"
+              width={1792}
+              height={1024}
+            />
+            <div className="absolute bottom-5 left-5 flex gap-3">
+              <span className="bg-[#C9A84C] px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-black">VISBODY 3D</span>
+              <span className="bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-black">HRV Scan</span>
+            </div>
+          </div>
+          <div className="bg-[#0D1B2A] p-7 md:p-12">
+            <h2 className="text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+              A análise que exames isolados ignoram
+            </h2>
+            <p className="mt-6 max-w-5xl text-xl font-bold uppercase leading-8 text-white/76">
+              O LifeCare mapeia drivers metabólicos através de exames corporais e laboratoriais, além de anamnese minuciosa. Enxergamos clusters de dados que definem sua longevidade real.
+            </p>
+          </div>
+        </div>
+      </section>
 
-                <p className="max-w-2xl leading-7 text-background/65">{step.text}</p>
-
-                <div className="lifecare-result-badge flex items-start gap-3 rounded-md border border-background/10 bg-background/[0.04] p-4">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" />
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-background/40">resultado</p>
-                    <p className="mt-1 font-medium">{step.result}</p>
-                  </div>
-                </div>
+      <section className="px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="max-w-4xl text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+            Visão 360: nenhum dado fica de fora
+          </h2>
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {dataBlocks.map(([Icon, title, text, badge]) => (
+              <article key={title} className="lcp-data-card">
+                <Icon className="size-7 text-[#00B4D8]" />
+                {badge && <span>{badge}</span>}
+                <h3>{title}</h3>
+                <p>{text}</p>
               </article>
             ))}
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
-
-export default function HomePage() {
-  const pageRef = useRef<HTMLElement>(null)
-  const heroRef = useRef(null)
-  const [reduceMotion, setReduceMotion] = useState(false)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 120])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.35])
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const updateMotionPreference = () => setReduceMotion(motionQuery.matches)
-    updateMotionPreference()
-    motionQuery.addEventListener("change", updateMotionPreference)
-
-    if (motionQuery.matches || !pageRef.current) {
-      return () => motionQuery.removeEventListener("change", updateMotionPreference)
-    }
-
-    const hoverCleanups: Array<() => void> = []
-
-    const context = gsap.context(() => {
-      gsap.set(".gsap-hero-item", { autoAlpha: 0, y: 28 })
-      gsap.set(".gsap-dashboard", { autoAlpha: 0, y: 34, scale: 0.985 })
-      gsap.set(".gsap-reveal", { autoAlpha: 0, y: 42 })
-      gsap.set(".gsap-card", { autoAlpha: 0, y: 34 })
-      gsap.set(".hero-telemetry-chip", { autoAlpha: 0, y: 18, scale: 0.94 })
-
-      const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } })
-      heroTimeline
-        .to(".gsap-hero-item", {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.82,
-          stagger: 0.09,
-        })
-        .to(
-          ".gsap-dashboard",
-          {
-            autoAlpha: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.9,
-          },
-          "-=0.52"
-        )
-        .to(
-          ".hero-telemetry-chip",
-          {
-            autoAlpha: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.58,
-            stagger: 0.08,
-          },
-          "-=0.58"
-        )
-
-      gsap.utils.toArray<HTMLElement>(".gsap-reveal").forEach((element) => {
-        gsap.to(element, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.78,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 82%",
-          },
-        })
-      })
-
-      gsap.utils.toArray<HTMLElement>(".gsap-card-group").forEach((group) => {
-        gsap.to(group.querySelectorAll(".gsap-card"), {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.72,
-          ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: {
-            trigger: group,
-            start: "top 78%",
-          },
-        })
-      })
-
-      gsap.utils.toArray<HTMLElement>(".gsap-parallax").forEach((element) => {
-        gsap.to(element, {
-          yPercent: -10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: element,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.8,
-          },
-        })
-      })
-
-      gsap.to(".gsap-bg-drift", {
-        xPercent: 3,
-        yPercent: -2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#inicio",
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.9,
-        },
-      })
-
-      const story = pageRef.current?.querySelector<HTMLElement>(".dashboard-scroll-story:not(.dashboard-static-story)")
-      const views = gsap.utils.toArray<HTMLElement>(".dashboard-view")
-      const steps = gsap.utils.toArray<HTMLElement>(".dashboard-story-step")
-      const orbitCards = gsap.utils.toArray<HTMLElement>(".dashboard-orbit-card")
-      const progressBar = pageRef.current?.querySelector<HTMLElement>(".dashboard-scroll-progress span")
-      const signalChips = gsap.utils.toArray<HTMLElement>(".dashboard-signal-cloud span")
-
-      if (story && views.length && steps.length) {
-        gsap.set(views, { autoAlpha: 0, y: 36, scale: 0.985 })
-        gsap.set(views[0], { autoAlpha: 1, y: 0, scale: 1 })
-        gsap.set(steps, { opacity: 0.42 })
-        gsap.set(steps[0], { opacity: 1 })
-        gsap.set(orbitCards, { autoAlpha: 1, y: 0, scale: 1, rotate: 0 })
-        gsap.set(signalChips, { autoAlpha: 1, y: 0 })
-        if (progressBar) {
-          gsap.set(progressBar, { scaleY: 0, transformOrigin: "top" })
-        }
-
-        const storyTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: story,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.45,
-          },
-        })
-
-        storyTimeline
-          .to(
-            orbitCards,
-            {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              rotate: 0,
-              duration: 0.42,
-              ease: "power3.out",
-              stagger: 0.08,
-            },
-            0.05
-          )
-          .to(
-            signalChips,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.3,
-              ease: "power2.out",
-              stagger: 0.045,
-            },
-            0.15
-          )
-
-        views.forEach((view, index) => {
-          if (index === 0) return
-
-          storyTimeline
-            .to(
-              views[index - 1],
-              {
-                autoAlpha: 0,
-                y: -34,
-                scale: 0.985,
-                duration: 0.32,
-                ease: "power3.inOut",
-              },
-              index - 0.22
-            )
-            .to(
-              view,
-              {
-                autoAlpha: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.42,
-                ease: "power3.out",
-              },
-              index - 0.08
-            )
-            .to(
-              steps,
-              {
-                opacity: 0.42,
-                duration: 0.22,
-                ease: "power1.out",
-              },
-              index - 0.08
-            )
-            .to(
-              steps[index],
-              {
-                opacity: 1,
-                duration: 0.28,
-                ease: "power1.out",
-              },
-              index - 0.02
-            )
-            .to(
-              orbitCards,
-              {
-                x: (cardIndex) => [12, -16, 10][cardIndex % 3] * index,
-                y: (cardIndex) => [-8, 12, -14][cardIndex % 3] * index,
-                rotate: (cardIndex) => [2, -2.5, 1.6][cardIndex % 3] * index,
-                duration: 0.5,
-                ease: "power3.inOut",
-              },
-              index - 0.04
-            )
-        })
-
-        if (progressBar) {
-          gsap.to(progressBar, {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: story,
-              start: "top top",
-              end: "bottom bottom",
-              scrub: true,
-            },
-          })
-        }
-
-        gsap.to(".dashboard-device", {
-          yPercent: -4,
-          ease: "none",
-          scrollTrigger: {
-            trigger: story,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.7,
-          },
-        })
-
-        gsap.to(".dashboard-chip", {
-          y: -6,
-          stagger: 0.05,
-          repeat: -1,
-          yoyo: true,
-          duration: 1.4,
-          ease: "sine.inOut",
-        })
-
-        gsap.to(".dashboard-signal-cloud span", {
-          x: 8,
-          y: -8,
-          stagger: 0.08,
-          repeat: -1,
-          yoyo: true,
-          duration: 2.6,
-          ease: "sine.inOut",
-        })
-      }
-
-      gsap.utils.toArray<HTMLElement>(".gsap-hover").forEach((element) => {
-        const enter = () => {
-          gsap.to(element, {
-            y: -6,
-            scale: 1.012,
-            duration: 0.32,
-            ease: "power2.out",
-          })
-        }
-        const leave = () => {
-          gsap.to(element, {
-            y: 0,
-            scale: 1,
-            duration: 0.34,
-            ease: "power2.out",
-          })
-        }
-
-        element.addEventListener("pointerenter", enter)
-        element.addEventListener("pointerleave", leave)
-        hoverCleanups.push(() => {
-          element.removeEventListener("pointerenter", enter)
-          element.removeEventListener("pointerleave", leave)
-        })
-      })
-
-      ScrollTrigger.refresh()
-    }, pageRef)
-
-    return () => {
-      hoverCleanups.forEach((cleanup) => cleanup())
-      context.revert()
-      motionQuery.removeEventListener("change", updateMotionPreference)
-    }
-  }, [])
-
-  return (
-    <main ref={pageRef} className="min-h-screen bg-background text-foreground">
-      <nav className="lifecare-nav fixed left-0 right-0 top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <a href="#inicio" className="flex items-center gap-3">
-            <span className="grid size-9 place-items-center rounded-md bg-primary text-primary-foreground">
-              <HeartPulse className="size-5" />
-            </span>
-            <span className="leading-none">
-              <span className="block font-semibold tracking-tight">LifeCare</span>
-              <span className="block text-sm text-muted-foreground">Performance</span>
-            </span>
-          </a>
-          <div className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
-            <a className="transition-colors hover:text-foreground" href="#solucao">Solução</a>
-            <a className="transition-colors hover:text-foreground" href="#dashboard">Dashboard</a>
-            <a className="transition-colors hover:text-foreground" href="#processo">Processo</a>
-            <a className="transition-colors hover:text-foreground" href="#contato">Contato</a>
-          </div>
-          <Button asChild size="sm" className="rounded-md">
-            <a href="#contato">Agendar demo</a>
-          </Button>
-        </div>
-      </nav>
-
-      <section id="inicio" ref={heroRef} className="lifecare-clip-stage relative min-h-screen pt-24">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,var(--background)_0%,var(--background)_55%,var(--cyan-light)_145%)]" />
-        <div className="gsap-bg-drift lifecare-ambient-flow absolute inset-0" aria-hidden="true" />
-        <div className="hero-data-grid absolute inset-0 opacity-35" />
-        {!reduceMotion && <HeroTelemetry />}
-        {!reduceMotion && <HeroOrb3D />}
-        <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
-          className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:min-h-[calc(100vh-6rem)] lg:grid-cols-[.92fr_1.08fr]"
-        >
-          <div>
-            <div className="gsap-hero-item lifecare-reveal lifecare-badge mb-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1.5 text-sm text-primary">
-              <Sparkles className="size-4" />
-              Inteligência médica para academias premium
-            </div>
-            <h1 className="gsap-hero-item lifecare-reveal max-w-4xl text-balance font-serif text-5xl font-semibold leading-[0.96] tracking-tight text-foreground md:text-7xl">
-              A saúde dos seus alunos traduzida em performance mensurável.
-            </h1>
-            <p className="gsap-hero-item lifecare-reveal mt-6 max-w-2xl text-lg leading-8 text-muted-foreground" style={{ animationDelay: ".12s" }}>
-              Um sistema para academias que conecta avaliação clínica, dados de treino,
-              biomarcadores e acompanhamento contínuo em uma experiência clara para equipe,
-              médico e aluno.
-            </p>
-            <div className="gsap-hero-item lifecare-reveal mt-8 flex flex-col gap-3 sm:flex-row" style={{ animationDelay: ".2s" }}>
-              <Button asChild size="lg" className="rounded-md">
-                <a className="gsap-hover" href="#contato">
-                  Agendar demonstração <ArrowRight className="ml-2 size-4" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-md bg-background/60">
-                <a className="gsap-hover" href="#dashboard">Ver painel</a>
-              </Button>
-            </div>
-          </div>
-          <div className="gsap-dashboard gsap-parallax">
-            <DashboardPreview />
-          </div>
-        </motion.div>
       </section>
 
-      <DataRibbon />
-
-      <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-5">
-          <Reveal className="gsap-reveal max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">o problema</p>
-            <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-              Academias geram dados, mas ainda vendem acompanhamento no escuro.
-            </h2>
-          </Reveal>
-          <div className="gsap-card-group mt-12 grid gap-5 md:grid-cols-3">
-            <MetricCard
-              label="Retenção"
-              value="+ risco"
-              detail="Sem leitura clínica, sinais de queda de evolução aparecem tarde demais."
-              icon={<Users className="size-5" />}
-            />
-            <MetricCard
-              label="Prescrição"
-              value="fragmentada"
-              detail="Treino, nutrição e exames ficam separados em ferramentas e conversas."
-              icon={<Target className="size-5" />}
-            />
-            <MetricCard
-              label="Percepção"
-              value="baixo valor"
-              detail="O aluno não vê claramente o progresso fisiológico que está comprando."
-              icon={<TrendingUp className="size-5" />}
-            />
-          </div>
-        </div>
-      </section>
-
-      <section id="solucao" className="border-y border-border bg-muted/35 py-24 md:py-32">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[.85fr_1.15fr]">
-          <Reveal className="gsap-reveal">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">a solução</p>
-            <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-              Um sistema operacional de performance médica.
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              O LifeCare organiza dados clínicos, sinais de recuperação, evolução de treino
-              e alertas de risco para transformar acompanhamento em decisão prática.
-            </p>
-          </Reveal>
-          <div className="gsap-card-group grid gap-4 sm:grid-cols-2">
-            {[
-              [FlaskConical, "Avaliação metabólica", "Exames, bioimpedância e marcadores-chave interpretados em uma linha de evolução."],
-              [Watch, "Dados contínuos", "Sono, recuperação, frequência e adesão conectados ao plano."],
-              [Stethoscope, "Leitura médica", "Critérios clínicos para orientar condutas e reduzir risco."],
-              [LineChart, "Performance visível", "Relatórios simples para equipe e aluno entenderem progresso."],
-            ].map(([Icon, title, text], index) => (
-              <Reveal key={String(title)} delay={index * 0.05}>
-                <div className="gsap-card gsap-hover lifecare-motion-card h-full rounded-lg border border-border bg-card p-6">
-                  <div className="lifecare-icon-pulse mb-5 grid size-11 place-items-center rounded-md bg-primary/10 text-primary">
-                    <Icon className="size-5" />
-                  </div>
-                  <h3 className="text-xl font-semibold tracking-tight">{title as string}</h3>
-                  <p className="mt-3 leading-7 text-muted-foreground">{text as string}</p>
-                </div>
-              </Reveal>
+      <section id="gps" className="bg-[#0D1B2A] px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+            Como funciona: o modelo GPS da saúde
+          </h2>
+          <p className="mt-6 max-w-4xl text-xl leading-8 text-white/68">
+            Assim como um GPS recalcula a rota em tempo real, o LifeCare monitora, processa e ajusta continuamente sua conduta clínica.
+          </p>
+          <div className="mt-12 grid gap-5 lg:grid-cols-4">
+            {gpsSteps.map(([number, Icon, title, text]) => (
+              <article key={number} className="lcp-step-card">
+                <span>{number}</span>
+                <Icon className="mt-8 size-8 text-[#00B4D8]" />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
             ))}
           </div>
+          <p className="mt-12 text-center text-xl font-black uppercase leading-8 text-[#C9A84C]">
+            Quanto mais tempo no programa, mais refinadas e eficazes se tornam as intervenções clínicas.
+          </p>
         </div>
       </section>
 
-      <DashboardScrollExperience />
+      <section id="lmis" className="lcp-grid-section px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <SectionLabel>LMIS · Scores e inteligência</SectionLabel>
+              <h2 className="mt-5 text-5xl font-black uppercase leading-none tracking-normal md:text-7xl">
+                Sem achismo. Só dados.
+              </h2>
+              <p className="mt-7 text-xl leading-8 text-white/68">
+                Sete scores objetivos, de 0 a 100, revelam onde está o gargalo do seu sistema biológico e direcionam a intervenção com precisão.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {scores.map(([code, label, value]) => (
+                <Gauge key={code} label={`${code} · ${label}`} value={Number(value)} />
+              ))}
+            </div>
+          </div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {[
+              ["Trajectory Engine", "Projeta para onde sua biologia está indo e como cada intervenção muda essa trajetória no tempo."],
+              ["Cardiovascular Engine", "Integra HRV, exames e histórico para calibrar carga e recuperação com precisão individual."],
+              ["Decision Engine", "Prioriza o que fazer primeiro: maior impacto, menor risco e decisão baseada em dados objetivos."],
+            ].map(([title, text]) => (
+              <article key={title} className="lcp-engine-card">
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8 rounded-lg border border-[#CC2200] bg-[#0D1B2A] p-6">
+            <p className="font-mono text-xs font-black uppercase tracking-[0.18em] text-[#CC2200]">Múltiplos alertas ativos</p>
+            <p className="mt-4 text-lg font-semibold leading-8 text-white/78">
+              O sistema identifica quando o organismo está sob múltiplas pressões simultâneas: sono crítico, queda de massa magra, baixa adesão, PCR elevada, insulina elevada, testosterona baixa e cortisol elevado.
+            </p>
+            <p className="mt-4 font-black uppercase text-[#CC2200]">Tradução direta: desequilíbrio sistêmico.</p>
+          </div>
+        </div>
+      </section>
 
-      <section id="dashboard-simple" className="py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-5">
-          <Reveal className="gsap-reveal mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">dashboard</p>
-            <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-              Animação com propósito: dados que se movem quando viram decisão.
-            </h2>
-          </Reveal>
-          <div className="gsap-card-group mt-14 grid gap-5 lg:grid-cols-[1fr_.8fr]">
-            <Reveal>
-              <div className="gsap-card lifecare-dashboard relative overflow-hidden rounded-lg border border-border bg-card p-6 shadow-[0_24px_70px_rgba(27,43,67,0.08)]">
-                <div className="lifecare-scanline" aria-hidden="true" />
-                <div className="mb-8 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Evolução integrada</p>
-                    <p className="mt-1 text-2xl font-semibold">Aluno em acompanhamento</p>
-                  </div>
-                  <BarChart3 className="size-6 text-primary" />
+      <section id="casos" className="bg-black px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionLabel>Resultados reais</SectionLabel>
+          <h2 className="mt-5 max-w-5xl text-4xl font-black uppercase leading-none tracking-normal text-[#C9A84C] md:text-6xl">
+            A transformação que os dados revelam
+          </h2>
+          <p className="mt-6 max-w-4xl text-xl leading-8 text-white/72">
+            Dois exemplos de transformação acompanhada por dados: redução de risco, recomposição corporal e evolução metabólica documentada ao longo do tempo.
+          </p>
+          <div className="mt-12 grid gap-8">
+            <article className="lcp-case-card border-[#CC2200]">
+              <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                <div>
+                  <p className="font-mono text-xs font-black uppercase tracking-[0.18em] text-[#CC2200]">Resultado 01</p>
+                  <h3>Transformação cardiometabólica em 12 meses</h3>
                 </div>
-                <div className="h-56">
-                  <AnimatedLine tone="cyan" />
-                </div>
+                <span>12 meses · masculino · obesidade cardiometabólica</span>
               </div>
-            </Reveal>
-            <div className="grid gap-5">
-              <Reveal delay={0.08}>
-                <div className="gsap-card gsap-hover lifecare-motion-card rounded-lg border border-border bg-card p-6">
-                  <ProgressRing value={91} label="clareza de plano" />
-                </div>
-              </Reveal>
-              <Reveal delay={0.14}>
-                <div className="gsap-card gsap-hover lifecare-motion-card rounded-lg border border-border bg-card p-6">
-                  <div className="mb-4 flex items-center gap-3">
-                    <ShieldCheck className="size-5 text-primary" />
-                    <h3 className="font-semibold">Alertas clínicos</h3>
-                  </div>
-                  <p className="leading-7 text-muted-foreground">
-                    A equipe sabe quando intervir, quando ajustar carga e quando acionar avaliação médica.
+              <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="grid content-start gap-5">
+                  <p className="text-lg font-semibold leading-8 text-white/76">
+                    Um paciente iniciou o LifeCare em 15/05/2025 com 125,1 kg, IMC 39,4 e 37% de gordura corporal, perfil compatível com obesidade cardiometabólica hipertrófica, inflamação silenciosa e baixa flexibilidade energética.
                   </p>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {[
+                      ["Sintomas associados", "Fadiga persistente, pior recuperação, oscilação de energia e dificuldade de concentração."],
+                      ["Drivers dominantes", "Gordura visceral, resistência insulínica, inflamação crônica e disfunção autonômica."],
+                      ["Potencial de resposta", "Ângulo de fase elevado e preservação muscular indicavam alta capacidade terapêutica."],
+                      ["Fenótipo atual", "Sobrepeso metabólico com preservação muscular e risco moderado/baixo."],
+                    ].map(([title, text]) => (
+                      <div key={title} className="lcp-insight-card">
+                        <strong>{title}</strong>
+                        <p>{text}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </Reveal>
-            </div>
+                <div className="lcp-proof-image">
+                  <Image
+                    src="/lifecare-cases/fhf-image10.png"
+                    alt="Dashboard LifeCare de bioimpedância e avatar corporal de transformação cardiometabólica"
+                    width={1890}
+                    height={1512}
+                  />
+                </div>
+              </div>
+              <CaseTable rows={fhfMetrics} />
+              <div className="grid gap-4 md:grid-cols-4">
+                {[
+                  ["-33,1 kg", "peso corporal eliminado"],
+                  ["-22,1 kg", "massa gorda eliminada"],
+                  ["-28,5 cm", "circunferência abdominal"],
+                  ["+75%", "relação músculo/gordura"],
+                ].map(([value, label]) => (
+                  <div key={label} className="lcp-result-tile">
+                    <strong>{value}</strong>
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="lcp-case-quote">
+                O objetivo nunca foi apenas emagrecer. Foi preservar performance enquanto eliminava risco biológico.
+              </p>
+            </article>
+
+            <article className="lcp-case-card border-[#C9A84C]">
+              <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                <div>
+                  <p className="font-mono text-xs font-black uppercase tracking-[0.18em] text-[#C9A84C]">Resultado 02</p>
+                  <h3>Recomposição metabólica longitudinal</h3>
+                </div>
+                <span>22 meses · feminino · 38 anos</span>
+              </div>
+              <p className="text-lg font-semibold leading-8 text-white/76">
+                Uma paciente de 38 anos entrou no LifeCare em julho de 2024 com deterioração cardiometabólica silenciosa. O LMIS identificou o ponto de virada: ângulo de fase 7,4°, sinal de integridade celular e alta capacidade de recomposição.
+              </p>
+              <CaseTable rows={dcMetrics} />
+              <div className="grid gap-4 md:grid-cols-3">
+                {[
+                  ["Julho 2024", "85 kg · 36,6% gordura · IMC 29,4 · ângulo de fase 7,4°"],
+                  ["Fevereiro 2025", "-9,5 kg · -7,6 kg gordura · -13 cm abdominal · ângulo de fase 7,9°"],
+                  ["Maio 2026", "71,8 kg · 26% gordura · IMC 24,8 · relação músculo/gordura 1,4"],
+                ].map(([title, text]) => (
+                  <div key={title} className="lcp-timeline-tile">
+                    <strong>{title}</strong>
+                    <p>{text}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="grid gap-4 md:grid-cols-4">
+                {["Rastreabilidade metabólica", "Preservação muscular", "Inteligência longitudinal", "Análise estrutural 3D"].map((item) => (
+                  <div key={item} className="rounded-md border border-white/10 bg-white/[0.03] p-4 text-sm font-semibold text-white/76">
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-lg border border-[#00B4D8]/30 bg-[#00B4D8]/[0.05] p-6">
+                <p className="font-mono text-xs font-black uppercase tracking-[0.18em] text-[#00B4D8]">Digital Twin estrutural</p>
+                <p className="mt-4 text-lg leading-8 text-white/72">
+                  Com Visbody, o acompanhamento deixou de olhar apenas peso e bioimpedância: passou a mapear circunferências segmentares, distribuição de gordura, simetria, postura, genu valgo e restrições de mobilidade para refinar a longevidade musculoesquelética.
+                </p>
+              </div>
+              <p className="lcp-case-quote">A paciente não apenas emagreceu. Ela se transformou.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <ProductTimeline />
+      <section className="border-y border-white/10 bg-[#0D1B2A] px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <SectionLabel>Protocolo clínico</SectionLabel>
+          <h2 className="mt-5 max-w-5xl text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+            O que o LifeCare faz quando os dados mostram a rota.
+          </h2>
+          <p className="mt-6 max-w-4xl text-xl leading-8 text-white/68">
+            As apresentações reforçam um ponto central: o resultado não vem de uma intervenção isolada. Ele nasce de ciclos de diagnóstico, protocolo, ajuste e reavaliação.
+          </p>
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {protocolPillars.map(([title, text]) => (
+              <article key={title} className="lcp-protocol-card">
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-12 text-center text-2xl font-semibold italic text-white">
+            Dados geram consciência. Consciência gera adesão. Adesão gera transformação.
+          </p>
+        </div>
+      </section>
 
-      <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-5">
-          <Reveal className="gsap-reveal mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">tecnologias</p>
-            <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-              Camada médica, dados e experiência para uma operação premium.
+      <section id="programa" className="px-5 py-24 md:py-32">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div>
+            <SectionLabel>Para quem é</SectionLabel>
+            <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-normal text-[#C9A84C] md:text-6xl">
+              Feito para quem não aceita o declínio como destino
             </h2>
-          </Reveal>
-          <div className="gsap-card-group mt-12 grid gap-5 md:grid-cols-3">
+            <p className="mt-7 text-xl leading-8 text-white/72">
+              Desenvolvido para executivos, empresários, médicos, atletas e profissionais de alta performance que entendem que o corpo é o principal ativo de uma vida de resultados.
+            </p>
+          </div>
+          <div className="grid gap-4">
             {[
-              [Dna, "Biomarcadores", "Leitura longitudinal de metabolismo, composição e risco."],
-              [Zap, "Automação", "Sinaliza prioridades para equipe sem aumentar a carga operacional."],
-              [Activity, "Performance", "Cruza resposta fisiológica com evolução de treino."],
-            ].map(([Icon, title, text], index) => (
-              <Reveal key={String(title)} delay={index * 0.06}>
-                <div className="gsap-card gsap-hover lifecare-motion-card rounded-lg border border-border bg-card p-7">
-                  <Icon className="size-7 text-primary" />
-                  <h3 className="mt-8 text-2xl font-semibold tracking-tight">{title as string}</h3>
-                  <p className="mt-4 leading-7 text-muted-foreground">{text as string}</p>
-                </div>
-              </Reveal>
+              "Dados sobre suposições.",
+              "Medicina preventiva antes da doença instalada.",
+              "Performance, longevidade e metabolismo no mesmo sistema.",
+              "Acompanhamento longitudinal com decisão clínica guiada por dados.",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-4 rounded-lg border border-[#C9A84C]/26 bg-[#C9A84C]/7 p-5">
+                <CheckCircle2 className="size-5 shrink-0 text-[#C9A84C]" />
+                <p className="font-bold text-white/88">{item}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contato" className="border-t border-border bg-muted/35 py-24 md:py-32">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_.85fr]">
-          <Reveal className="gsap-reveal">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">demonstração</p>
-            <h2 className="mt-4 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-              Veja como o LifeCare pode virar diferencial comercial da sua academia.
+      <section id="contato" className="border-t border-white/10 bg-[#0D1B2A] px-5 py-24 md:py-32">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
+          <div>
+            <SectionLabel>Demonstração</SectionLabel>
+            <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-normal md:text-6xl">
+              Descubra o que seus exames isolados não mostram.
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-              Uma demonstração objetiva para entender sua operação, seus dados atuais e o primeiro
-              fluxo de performance médica que pode ser implantado.
+            <p className="mt-7 max-w-2xl text-xl leading-8 text-white/72">
+              Agende uma conversa objetiva para entender como o LifeCare pode mapear seu status biológico, seus riscos silenciosos e sua trajetória de performance.
             </p>
-            <div className="mt-8 grid gap-4 text-sm text-muted-foreground">
-              <span className="flex items-center gap-3"><Mail className="size-4 text-primary" /> contato@lifecareperformance.com.br</span>
-              <span className="flex items-center gap-3"><Phone className="size-4 text-primary" /> +55 (11) 99999-9999</span>
-              <span className="flex items-center gap-3"><MapPin className="size-4 text-primary" /> São Paulo, Brasil</span>
-            </div>
-          </Reveal>
-          <Reveal className="gsap-reveal" delay={0.1}>
-            <form className="gsap-hover rounded-lg border border-border bg-card p-6 shadow-[0_24px_70px_rgba(27,43,67,0.08)]">
-              <div className="grid gap-4">
-                {["Nome", "Email", "Academia"].map((label) => (
-                  <label key={label} className="grid gap-2 text-sm font-medium">
-                    {label}
-                    <input
-                      className="h-12 rounded-md border border-input bg-background px-4 text-base outline-none transition-colors focus:border-primary"
-                      placeholder={label}
-                    />
-                  </label>
-                ))}
-                <label className="grid gap-2 text-sm font-medium">
-                  Principal objetivo
-                  <textarea
-                    className="min-h-28 rounded-md border border-input bg-background p-4 text-base outline-none transition-colors focus:border-primary"
-                    placeholder="Retenção, ticket premium, acompanhamento médico, diferenciação..."
-                  />
+          </div>
+          <form
+            action="mailto:contato@lifecareperformance.com?subject=Solicitacao%20LifeCare%20Medical%20Performance"
+            method="post"
+            encType="text/plain"
+            className="rounded-lg border border-white/12 bg-black/28 p-6"
+          >
+            <div className="grid gap-4">
+              {[
+                ["Nome", "nome"],
+                ["Email", "email"],
+                ["Telefone", "telefone"],
+              ].map(([label, name]) => (
+                <label key={name} className="grid gap-2 text-sm font-bold uppercase tracking-[0.12em] text-white/62">
+                  {label}
+                  <input name={name} required className="h-12 rounded-md border border-white/12 bg-white/[0.04] px-4 text-base normal-case tracking-normal text-white outline-none transition focus:border-[#C9A84C]" />
                 </label>
-                <Button className="gsap-hover mt-2 h-12 rounded-md">
-                  Solicitar demonstração <ArrowRight className="ml-2 size-4" />
-                </Button>
-              </div>
-            </form>
-          </Reveal>
+              ))}
+              <label className="grid gap-2 text-sm font-bold uppercase tracking-[0.12em] text-white/62">
+                Objetivo principal
+                <textarea name="objetivo" required className="min-h-28 rounded-md border border-white/12 bg-white/[0.04] p-4 text-base normal-case tracking-normal text-white outline-none transition focus:border-[#C9A84C]" />
+              </label>
+              <button type="submit" className="lcp-cta lcp-cta-gold mt-2 justify-center">
+                Agendar demonstração <ArrowRight className="size-4" />
+              </button>
+            </div>
+          </form>
         </div>
       </section>
 
-      <footer className="border-t border-border py-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <span className="grid size-8 place-items-center rounded-md bg-primary text-primary-foreground">
-              <HeartPulse className="size-4" />
-            </span>
-            <span><strong className="text-foreground">LifeCare</strong> Performance</span>
-          </div>
+      <footer className="border-t border-white/10 px-5 py-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-white/48 md:flex-row md:items-center md:justify-between">
+          <span className="font-bold uppercase tracking-[0.16em] text-white">LifeCare Medical Performance</span>
           <span>© 2026 LifeCare Performance. Todos os direitos reservados.</span>
         </div>
       </footer>

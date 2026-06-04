@@ -14,19 +14,22 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'LifeCare Performance | Inteligência Médica para Academias',
-  description: 'Transforme treino em resultados mensuráveis. Sistema de performance médica que combina dados clínicos, avaliação metabólica e acompanhamento contínuo para academias premium.',
-  keywords: ['academia', 'saúde', 'dados médicos', 'performance', 'fitness', 'metabolismo', 'bioimpedância'],
+  title: 'LifeCare Medical Performance | Medicina Preventiva Baseada em Dados',
+  description: 'Programa médico premium que integra LifeCare e LMIS para revelar risco silencioso, metabolismo, performance e longevidade com dados reais.',
+  keywords: ['medicina preventiva', 'LifeCare', 'LMIS', 'performance', 'longevidade', 'metabolismo', 'Visbody', 'HRV'],
   authors: [{ name: 'LifeCare Performance' }],
+  icons: {
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+  },
   openGraph: {
-    title: 'LifeCare Performance | Inteligência Médica para Academias',
-    description: 'A saúde dos seus alunos, traduzida em dados.',
+    title: 'LifeCare Medical Performance | Medicina Preventiva Baseada em Dados',
+    description: 'Sem achismo. Só dados para saúde, performance e longevidade.',
     type: 'website',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#f8f9fa',
+  themeColor: '#0A0D1A',
   width: 'device-width',
   initialScale: 1,
 }
@@ -37,7 +40,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable} bg-background`}>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${inter.variable} ${playfair.variable} bg-background`}
+    >
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
