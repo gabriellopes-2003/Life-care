@@ -19,6 +19,7 @@ node_modules
 *.out.log
 *.err.log
 *.png
+!public/body-dashboard.png
 !public/lifecare-cases/
 !public/lifecare-cases/fhf-image10.png
 !public/lifecare-assets/
