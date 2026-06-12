@@ -1321,7 +1321,13 @@ button.gsap-hover,
 .lcp-data-card,
 .lcp-step-card,
 .lcp-engine-card,
-.lcp-case-card {
+.lcp-case-card,
+.lcp-program-card,
+.lcp-program-module,
+.lcp-program-includes,
+.lcp-investment-card,
+.lcp-doctor-card,
+.lcp-leadership-panel {
   border-width: 1px;
   border-radius: 0.5rem;
   background: rgba(10, 13, 26, 0.72);
@@ -1332,7 +1338,13 @@ button.gsap-hover,
 .lcp-data-card h3,
 .lcp-step-card h3,
 .lcp-engine-card h3,
-.lcp-case-card h3 {
+.lcp-case-card h3,
+.lcp-program-card h3,
+.lcp-program-module h3,
+.lcp-program-includes h3,
+.lcp-investment-card h3,
+.lcp-doctor-card h3,
+.lcp-leadership-panel h3 {
   margin-top: 1rem;
   font-size: 1.55rem;
   font-weight: 900;
@@ -1343,7 +1355,12 @@ button.gsap-hover,
 .lcp-system-card p,
 .lcp-data-card p,
 .lcp-step-card p,
-.lcp-engine-card p {
+.lcp-engine-card p,
+.lcp-program-card p,
+.lcp-program-module p,
+.lcp-investment-card p,
+.lcp-doctor-card p,
+.lcp-leadership-panel p {
   margin-top: 1rem;
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.68);
@@ -1555,6 +1572,181 @@ button.gsap-hover,
   color: #fff;
 }
 
+.lcp-program {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 10%, rgba(201, 168, 76, 0.13), transparent 28rem),
+    radial-gradient(circle at 10% 42%, rgba(0, 180, 216, 0.11), transparent 26rem),
+    #0A0D1A;
+}
+
+.lcp-program-statement,
+.lcp-mission-card {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  background:
+    linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.03)),
+    rgba(10, 13, 26, 0.78);
+  padding: 1.5rem;
+}
+
+.lcp-program-statement span,
+.lcp-mission-card span,
+.lcp-doctor-card > span,
+.lcp-program-card > span,
+.lcp-investment-card > span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #C9A84C;
+}
+
+.lcp-program-statement strong {
+  display: block;
+  margin-top: 1rem;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 950;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.lcp-program-card {
+  border-color: rgba(201, 168, 76, 0.24);
+  background: rgba(13, 27, 42, 0.72);
+}
+
+.lcp-program-card:nth-child(4n),
+.lcp-program-card:nth-child(5n) {
+  border-color: rgba(0, 180, 216, 0.28);
+}
+
+.lcp-program-includes {
+  border-color: rgba(201, 168, 76, 0.28);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(201, 168, 76, 0.11), transparent 18rem),
+    rgba(13, 27, 42, 0.72);
+}
+
+.lcp-program-includes h3 {
+  max-width: 42rem;
+  color: #fff;
+}
+
+.lcp-investment-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  border-color: rgba(201, 168, 76, 0.5);
+  background:
+    linear-gradient(145deg, rgba(201, 168, 76, 0.16), rgba(0, 180, 216, 0.08)),
+    #050810;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+
+.lcp-investment-card h3 {
+  color: #fff;
+}
+
+.lcp-investment-card p {
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.lcp-investment-card strong {
+  display: block;
+  margin: 0.3rem 0 2rem;
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+  font-weight: 950;
+  line-height: 0.9;
+  color: #C9A84C;
+}
+
+.lcp-program-module,
+.lcp-leadership-panel {
+  border-color: rgba(0, 180, 216, 0.28);
+  background: rgba(0, 180, 216, 0.055);
+}
+
+.lcp-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  background: rgba(201, 168, 76, 0.065);
+  padding: 1rem;
+}
+
+.lcp-check-row p {
+  font-weight: 800;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.lcp-doctor-card {
+  border-color: rgba(201, 168, 76, 0.36);
+  background:
+    radial-gradient(circle at 78% 18%, rgba(0, 180, 216, 0.13), transparent 18rem),
+    #0D1B2A;
+}
+
+.lcp-doctor-card h3 {
+  color: #C9A84C;
+}
+
+.lcp-expertise-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0.85rem 1rem;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.lcp-mission-card p {
+  margin-top: 1rem;
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.lcp-demo-action {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: fit-content;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  background: rgba(201, 168, 76, 0.07);
+  padding: 0.85rem 1rem;
+}
+
+.lcp-demo-action span {
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+
 @keyframes lcp-pulse {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(204, 34, 0, 0.34);
@@ -1591,7 +1783,11 @@ button.gsap-hover,
   .lcp-data-card,
   .lcp-step-card,
   .lcp-engine-card,
-  .lcp-case-card {
+  .lcp-case-card,
+  .lcp-program-card,
+  .lcp-program-module,
+  .lcp-doctor-card,
+  .lcp-leadership-panel {
     padding: 1.1rem;
   }
 

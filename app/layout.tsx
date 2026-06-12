@@ -14,16 +14,16 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'LifeCare Medical Performance | Medicina Preventiva Baseada em Dados',
-  description: 'Programa médico premium que integra LifeCare e LMIS para revelar risco silencioso, metabolismo, performance e longevidade com dados reais.',
-  keywords: ['medicina preventiva', 'LifeCare', 'LMIS', 'performance', 'longevidade', 'metabolismo', 'Visbody', 'HRV'],
+  title: 'Programa LifeCare 12 Meses | Saúde, Performance e Longevidade',
+  description: 'Acompanhamento médico de 12 meses com bioimpedâncias, calorimetria, wearable, dashboard evolutivo e decisões guiadas por dados.',
+  keywords: ['Programa LifeCare 12 Meses', 'medicina preventiva', 'LifeCare', 'LMIS', 'performance', 'longevidade', 'metabolismo', 'bioimpedância', 'calorimetria', 'HRV'],
   authors: [{ name: 'LifeCare Performance' }],
   icons: {
     icon: [{ url: '/favicon.png', type: 'image/png' }],
   },
   openGraph: {
-    title: 'LifeCare Medical Performance | Medicina Preventiva Baseada em Dados',
-    description: 'Sem achismo. Só dados para saúde, performance e longevidade.',
+    title: 'Programa LifeCare 12 Meses | Medicina Guiada por Dados',
+    description: 'Saúde, performance e longevidade com acompanhamento longitudinal, tecnologia e inteligência clínica.',
     type: 'website',
   },
 }

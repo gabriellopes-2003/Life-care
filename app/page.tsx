@@ -8,9 +8,12 @@ import {
   AlertTriangle,
   ArrowRight,
   Brain,
+  CalendarCheck,
   CheckCircle2,
+  ClipboardCheck,
+  Dna,
+  Eye,
   HeartPulse,
-  Lock,
   Microscope,
   ScanLine,
   Stethoscope,
@@ -21,14 +24,16 @@ import {
 
 const navItems = [
   ["Início", "#inicio"],
-  ["O Ecossistema", "#ecossistema"],
   ["Como Funciona", "#gps"],
+  ["O Ecossistema", "#ecossistema"],
   ["Tecnologia", "#tecnologia"],
   ["LMIS", "#lmis"],
   ["Casos Clínicos", "#casos"],
   ["Programa", "#programa"],
-  ["Dr. Muriel", "#contato"],
+  ["Dr. Muriel", "#lideranca"],
 ]
+
+const whatsappHref = "https://wa.me/5541988812705?text=Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o"
 
 const alerts = [
   ["Inflamação", "Elevada"],
@@ -133,6 +138,72 @@ const protocolPillars = [
   ["Inteligência metabólica", "Leitura contínua de marcadores funcionais para orientar ajustes clínicos com precisão."],
   ["Monitoramento contínuo", "Rastreabilidade longitudinal com reavaliações periódicas e decisões baseadas em evidências."],
   ["Ajustes por dados", "Cada decisão sustentada por biomarcadores objetivos, não por percepção subjetiva."],
+]
+
+const programStructure = [
+  ["Avaliação inicial", "Consulta médica especializada, anamnese detalhada, histórico de saúde, objetivos individuais e leitura de rotina, sono, estresse e atividade física."],
+  ["12 bioimpedâncias", "Acompanhamento periódico de peso, gordura, massa muscular, gordura visceral, água corporal, circunferência abdominal e relação músculo:gordura."],
+  ["4 reavaliações", "Ciclos programados para medir resultados, corrigir desvios de rota, atualizar metas e otimizar dieta, treino e hábitos."],
+  ["Calorimetria", "Medição da taxa metabólica basal real, gasto energético estimado, eficiência metabólica e predominância de uso de gordura ou carboidrato em repouso."],
+  ["Wearable", "Monitoramento contínuo de frequência cardíaca, HRV, sono, recuperação fisiológica, atividade física e gasto energético."],
+  ["Dashboard evolutivo", "Integração dos dados na plataforma LifeCare Intelligence para visualizar tendências corporais, metabólicas, cardiovasculares e comportamentais."],
+  ["Acompanhamento contínuo", "A saúde deixa de ser analisada como fotografia e passa a ser acompanhada como filme, com decisões baseadas na evolução real."],
+]
+
+const programModules = [
+  ["Composição corporal avançada", "Peso, percentual de gordura, massa muscular, gordura visceral, água corporal, distribuição segmentar e circunferência abdominal para melhorar qualidade corporal, não apenas reduzir peso."],
+  ["Avaliação laboratorial estratégica", "Perfil glicêmico, lipídico, inflamatório, hepático, renal, hormonal, cardiometabólico, vitaminas e minerais conforme necessidade individual."],
+  ["LifeCare Intelligence", "Dashboards clínicos organizam evolução corporal, tendências metabólicas, sono, recuperação, adesão, metas e indicadores de desempenho."],
+]
+
+const programIncludes = [
+  "Avaliação médica completa",
+  "Bioimpedância avançada",
+  "Calorimetria indireta",
+  "Escaneamento corporal 3D",
+  "Monitoramento contínuo",
+  "Dashboard evolutivo",
+  "Plano individualizado",
+  "Acompanhamento por 12 meses",
+]
+
+const demoActions: Array<[LucideIcon, string]> = [
+  [Activity, "Descubra seu status metabólico"],
+  [CalendarCheck, "Agende sua avaliação LifeCare"],
+  [ClipboardCheck, "Receba seu plano de performance"],
+  [Dna, "Descubra sua idade biológica"],
+  [Eye, "Veja como seu corpo realmente funciona"],
+]
+
+const audienceGoals = [
+  "Emagrecimento sustentável",
+  "Ganho de massa muscular",
+  "Melhora da composição corporal",
+  "Controle metabólico",
+  "Melhora da performance física",
+  "Otimização hormonal",
+  "Aumento da disposição",
+  "Melhora do sono",
+  "Prevenção de doenças cardiometabólicas",
+  "Construção de longevidade com qualidade de vida",
+]
+
+const leadershipAreas = [
+  "Anestesiologia",
+  "Nutrologia",
+  "Medicina do Exercício e do Esporte",
+  "Acupuntura",
+]
+
+const scientificExpertise = [
+  "Composição corporal",
+  "Metabolismo energético",
+  "Performance física",
+  "Saúde cardiovascular",
+  "Controle de peso",
+  "Recuperação fisiológica",
+  "Saúde hormonal",
+  "Longevidade saudável",
 ]
 
 function SectionLabel({ children }: { children: string }) {
@@ -263,16 +334,12 @@ export default function HomePage() {
               Exame normal. Corpo adoecendo em silêncio. Seu corpo pode estar mandando sinais que nenhum exame rotineiro é capaz de detectar.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <a href="#programa" className="lcp-cta lcp-cta-gold">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="lcp-cta lcp-cta-gold">
+                <CalendarCheck className="size-4" /> Agendar Avaliação
+              </a>
+              <a href="#programa" className="lcp-cta lcp-cta-ghost">
                 Conheça o Programa <ArrowRight className="size-4" />
               </a>
-              <a href="#casos" className="lcp-cta lcp-cta-ghost">
-                Ver Casos Clínicos
-              </a>
-            </div>
-            <div className="mt-10 inline-flex items-center gap-3 rounded-md border border-[#C9A84C]/35 bg-[#C9A84C]/8 px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-[#C9A84C]">
-              <Lock className="size-4" />
-              Medicina preventiva baseada em dados reais
             </div>
           </div>
           <HeroDashboard />
@@ -334,7 +401,7 @@ export default function HomePage() {
                 <strong>Crítico</strong>
               </div>
             </div>
-            <a href="#contato" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-[#C9A84C]">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-[#C9A84C]">
               Descubra seu status biológico <ArrowRight className="size-4" />
             </a>
           </div>
@@ -619,29 +686,163 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="programa" className="px-5 py-24 md:py-32">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <div>
-            <SectionLabel>Para quem é</SectionLabel>
-            <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-normal text-[#C9A84C] md:text-6xl">
-              Feito para quem não aceita o declínio como destino
-            </h2>
-            <p className="mt-7 text-xl leading-8 text-white/72">
-              Desenvolvido para executivos, empresários, médicos, atletas e profissionais de alta performance que entendem que o corpo é o principal ativo de uma vida de resultados.
+      <section id="programa" className="lcp-program px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[1fr_0.82fr] lg:items-end">
+            <div>
+              <SectionLabel>Programa LifeCare 12 Meses</SectionLabel>
+              <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-normal text-[#C9A84C] md:text-6xl">
+                Saúde, performance e longevidade guiadas por dados.
+              </h2>
+              <p className="mt-7 text-xl leading-8 text-white/72">
+                O Programa LifeCare 12 Meses foi desenvolvido para pessoas que desejam parar de tomar decisões baseadas em achismos e iniciar uma jornada estruturada de acompanhamento médico, avaliação corporal, monitoramento metabólico e otimização da saúde ao longo do tempo.
+              </p>
+              <p className="mt-5 text-xl leading-8 text-white/72">
+                Diferente de uma consulta isolada, o LifeCare funciona como um sistema contínuo de gestão da saúde, acompanhando corpo, metabolismo, composição corporal, condicionamento físico, hábitos de vida e biomarcadores de forma integrada.
+              </p>
+            </div>
+            <div className="lcp-program-statement">
+              <span>Objetivo central</span>
+              <strong>Transformar dados em decisões e decisões em resultados.</strong>
+            </div>
+          </div>
+
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {programStructure.map(([title, text], index) => (
+              <article key={title} className="lcp-program-card">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            {programModules.map(([title, text]) => (
+              <article key={title} className="lcp-program-module">
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+            <div className="lcp-program-includes">
+              <SectionLabel>O que você recebe no Programa LifeCare</SectionLabel>
+              <h3>Um acompanhamento completo, mensurável e contínuo.</h3>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {programIncludes.map((item) => (
+                  <div key={item} className="lcp-check-row">
+                    <CheckCircle2 className="size-5 shrink-0 text-[#C9A84C]" />
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <aside className="lcp-investment-card">
+              <span>Investimento</span>
+              <h3>Programa LifeCare 12 meses</h3>
+              <p>A partir de</p>
+              <strong>R$ 249/mês</strong>
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="lcp-cta lcp-cta-gold justify-center">
+                Quero Minha Avaliação <ArrowRight className="size-4" />
+              </a>
+            </aside>
+          </div>
+
+          <div className="mt-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <SectionLabel>Para quem é indicado</SectionLabel>
+              <h3 className="mt-5 text-3xl font-black uppercase leading-none text-white md:text-5xl">
+                Para quem quer acompanhar a saúde como processo, não como evento isolado.
+              </h3>
+              <p className="mt-6 text-lg leading-8 text-white/68">
+                O LifeCare integra avaliação médica, composição corporal, metabolismo, exames laboratoriais, monitoramento contínuo e inteligência clínica para fornecer uma visão completa da evolução do paciente ao longo do tempo.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {audienceGoals.map((item) => (
+                <div key={item} className="lcp-check-row">
+                  <CheckCircle2 className="size-5 shrink-0 text-[#C9A84C]" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-14 rounded-lg border border-[#C9A84C]/28 bg-[#C9A84C]/[0.07] p-7 md:p-10">
+            <p className="text-2xl font-black uppercase leading-9 text-white md:text-3xl">
+              Saúde não deve ser analisada por uma fotografia. Ela deve ser acompanhada como um filme.
             </p>
           </div>
-          <div className="grid gap-4">
-            {[
-              "Dados sobre suposições.",
-              "Medicina preventiva antes da doença instalada.",
-              "Performance, longevidade e metabolismo no mesmo sistema.",
-              "Acompanhamento longitudinal com decisão clínica guiada por dados.",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-4 rounded-lg border border-[#C9A84C]/26 bg-[#C9A84C]/7 p-5">
-                <CheckCircle2 className="size-5 shrink-0 text-[#C9A84C]" />
-                <p className="font-bold text-white/88">{item}</p>
+        </div>
+      </section>
+
+      <section id="lideranca" className="border-y border-white/10 bg-black px-5 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+            <div>
+              <SectionLabel>Liderança Médica e Científica</SectionLabel>
+              <h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-normal text-[#C9A84C] md:text-6xl">
+                Conheça quem está por trás do LifeCare.
+              </h2>
+              <p className="mt-7 text-xl leading-8 text-white/72">
+                O LifeCare nasceu da experiência clínica de mais de duas décadas acompanhando pacientes em diferentes fases da vida, desde procedimentos hospitalares complexos até programas de otimização de saúde, composição corporal, performance e longevidade.
+              </p>
+              <p className="mt-5 text-xl leading-8 text-white/72">
+                Sob a liderança do <strong className="text-white">Dr. Muriel Heibel (CRM-PR 18653)</strong>, o LifeCare une medicina baseada em evidências, tecnologia de monitoramento contínuo e inteligência de dados em um ecossistema de acompanhamento longitudinal.
+              </p>
+            </div>
+            <article className="lcp-doctor-card">
+              <span>Direção clínica</span>
+              <h3>Dr. Muriel Heibel</h3>
+              <p>Médico com atuação multidisciplinar e visão integrada da saúde humana.</p>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                {leadershipAreas.map((item) => (
+                  <div key={item} className="lcp-check-row">
+                    <Stethoscope className="size-5 shrink-0 text-[#00B4D8]" />
+                    <p>{item}</p>
+                  </div>
+                ))}
               </div>
+            </article>
+          </div>
+
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            <article className="lcp-leadership-panel">
+              <h3>Uma visão diferente de saúde</h3>
+              <p>
+                Pacientes realizavam consultas, exames e tratamentos isolados, porém sem uma estratégia estruturada para acompanhar evolução ao longo do tempo. O resultado era previsível: dados desconectados, decisões baseadas em impressões momentâneas e dificuldade em medir resultados reais.
+              </p>
+              <p>
+                Foi dessa necessidade que surgiu o LifeCare: um sistema criado para transformar informações dispersas em inteligência clínica prática e acionável.
+              </p>
+            </article>
+            <article className="lcp-leadership-panel">
+              <h3>Medicina guiada por dados</h3>
+              <p>
+                Cada decisão clínica é fundamentada pela integração de avaliação médica, exames laboratoriais, bioimpedância avançada, calorimetria indireta, wearable, sono, HRV, composição corporal, hábitos e comportamento.
+              </p>
+              <p>
+                O objetivo é compreender não apenas o estado atual do paciente, mas também a trajetória da sua saúde ao longo do tempo.
+              </p>
+            </article>
+          </div>
+
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {scientificExpertise.map((item) => (
+              <div key={item} className="lcp-expertise-chip">{item}</div>
             ))}
+          </div>
+
+          <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+            <div className="lcp-mission-card">
+              <span>Nossa missão</span>
+              <p>Transformar dados em conhecimento. Transformar conhecimento em decisões. Transformar decisões em saúde, performance e longevidade.</p>
+            </div>
+            <p className="text-2xl font-semibold italic leading-9 text-white">
+              LifeCare Performance. Medicina. Tecnologia. Inteligência. Evolução.
+            </p>
           </div>
         </div>
       </section>
@@ -656,13 +857,16 @@ export default function HomePage() {
             <p className="mt-7 max-w-2xl text-xl leading-8 text-white/72">
               Agende uma conversa objetiva para entender como o LifeCare pode mapear seu status biológico, seus riscos silenciosos e sua trajetória de performance.
             </p>
+            <div className="mt-9 grid gap-3">
+              {demoActions.map(([Icon, item]) => (
+                <div key={item} className="lcp-demo-action">
+                  <Icon className="size-5 shrink-0 text-[#C9A84C]" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <form
-            action="mailto:contato@lifecareperformance.com?subject=Solicitacao%20LifeCare%20Medical%20Performance"
-            method="post"
-            encType="text/plain"
-            className="rounded-lg border border-white/12 bg-black/28 p-6"
-          >
+          <div className="rounded-lg border border-white/12 bg-black/28 p-6">
             <div className="grid gap-4">
               {[
                 ["Nome", "nome"],
@@ -678,11 +882,11 @@ export default function HomePage() {
                 Objetivo principal
                 <textarea name="objetivo" required className="min-h-28 rounded-md border border-white/12 bg-white/[0.04] p-4 text-base normal-case tracking-normal text-white outline-none transition focus:border-[#C9A84C]" />
               </label>
-              <button type="submit" className="lcp-cta lcp-cta-gold mt-2 justify-center">
-                Agendar demonstração <ArrowRight className="size-4" />
-              </button>
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="lcp-cta lcp-cta-gold mt-2 justify-center">
+                Quero Minha Avaliação <ArrowRight className="size-4" />
+              </a>
             </div>
-          </form>
+          </div>
         </div>
       </section>
 
