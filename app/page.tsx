@@ -193,6 +193,7 @@ const leadershipAreas = [
   "Nutrologia",
   "Medicina do Exercício e do Esporte",
   "Acupuntura",
+  "Neurociência",
 ]
 
 const scientificExpertise = [
